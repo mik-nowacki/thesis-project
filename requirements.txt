@@ -2,3 +2,5 @@ pandas
 numpy
 matplotlib
 vitaldb
+torch
+scikit-learn
