@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/data/users/nowacki/thesis-project/src/bash_scripts/../python_scripts/training.py", line 12, in <module>
+    from models import ForecastingModel
+ModuleNotFoundError: No module named 'models'

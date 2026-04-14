@@ -1,0 +1,16 @@
+# Ignore the data folder (you just added this)
+data/
+
+# Ignore Python compiled files and cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore saved model weights (prevents massive repos)
+models/saved_weights/
+*.pth
+*.pt
+*.h5
+
+# Ignore temporary download logs
+wget-log
