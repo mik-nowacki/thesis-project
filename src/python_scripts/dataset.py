@@ -91,3 +91,13 @@ def load_test_eeg_samples(path, split, seq_len, features):
     split_idx = int(len(X_test) * split)
     return X_test[split_idx:], Y_test[split_idx:]
 
+# -------------- *NORMALIZED* EEG PREPROCESSED SPECTRA --------------
+def load_normalized_eeg_samples(path, seq_len, features):
+    df = pd.read_csv(path)
+    x = []
+    for f in features:
+        x_f = df[f]
+        x_f_mean = np.mean(x_f)
+        x_f_std = np.std(x_f)
+        x_f_z = [(x_fi - x_f_mean)/x_f_std for x_fi in x_f]
+        x.append(x_f_z)
