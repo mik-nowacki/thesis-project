@@ -83,9 +83,11 @@ def load_eeg_samples(path, seq_len, features):
 
 def load_training_eeg_samples(path, split, seq_len, features):
     X_train, Y_train = load_eeg_samples(path, seq_len, features)
-    return X_train[:split], Y_train[:split]
+    split_dx = int(len(X_train) * split)
+    return X_train[:split_dx], Y_train[:split_dx]
 
 def load_test_eeg_samples(path, split, seq_len, features):
     X_test, Y_test = load_eeg_samples(path, seq_len, features)
-    return X_test[split:], Y_test[split:]
+    split_idx = int(len(X_test) * split)
+    return X_test[split_idx:], Y_test[split_idx:]
 

@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/data/users/nowacki/thesis-project/src/python_scripts/train_eeg_sample.py", line 46, in <module>
-    X_train, Y_train = load_training_eeg_samples(PATH, SPLIT, SEQ_LEN, FEATURES)
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/data/users/nowacki/thesis-project/src/python_scripts/dataset.py", line 86, in load_training_eeg_samples
-    return X_train[:split], Y_train[:split]
-           ~~~~~~~^^^^^^^^
-TypeError: slice indices must be integers or None or have an __index__ method
