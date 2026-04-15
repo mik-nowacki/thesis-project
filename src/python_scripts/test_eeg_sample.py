@@ -16,7 +16,7 @@ NUMBER_OF_PATIENTS = 10 # doesn't do anything for now
 DEVICE = 'cuda'
 PATH = 'data/processed/eeg_sample.csv'
 WEIGHTS_PATH = 'models/saved_weights/'
-# --------------------------------------------------------------------
+# -------------------------------------------------------------------
 
 # Initialize the architecture (must match training)
 model = ForecastingModel(

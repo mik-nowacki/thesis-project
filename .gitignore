@@ -1,4 +1,4 @@
-# Ignore the data folder (you just added this)
+# Ignore the data folder
 data/
 
 # Ignore Python compiled files and cache
