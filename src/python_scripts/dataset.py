@@ -95,9 +95,27 @@ def load_test_eeg_samples(path, split, seq_len, features):
 def load_normalized_eeg_samples(path, seq_len, features):
     df = pd.read_csv(path)
     x = []
+    x_means = {}
+    x_stds = {}
     for f in features:
         x_f = df[f]
         x_f_mean = np.mean(x_f)
         x_f_std = np.std(x_f)
         x_f_z = [(x_fi - x_f_mean)/x_f_std for x_fi in x_f]
         x.append(x_f_z)
+        x_means[f] = x_f_mean
+        x_stds[f] = x_f_std
+    
+    x_z = np.stack(x, axis=1)
+    X = np.array([x_z[i:i+seq_len] for i in range(x_z.shape[0]-seq_len)])
+    X = X.reshape(-1, seq_len, len(features))
+
+    y = df.bis
+    Y = np.array([y[i+seq_len] for i in range(len(y)-seq_len)]).reshape(-1, 1)
+
+    return X, Y, x_means, x_stds
+
+def load_normalized_eeg_train(path, split, seq_len, features):
+    X, Y, x_means, x_stds = load_normalized_eeg_samples(path, seq_len, features)
+    split_idx = int(len(X) * split)
+    return X[:split_idx], Y[:split_idx], x_means, x_stds

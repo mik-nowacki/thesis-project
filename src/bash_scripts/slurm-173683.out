@@ -1,0 +1,16 @@
+Epoch 1/15: Loss=4.148602
+Epoch 2/15: Loss=4.229221
+Epoch 3/15: Loss=4.277733
+Epoch 4/15: Loss=4.303448
+Epoch 5/15: Loss=4.340584
+Epoch 6/15: Loss=4.344929
+Epoch 7/15: Loss=4.349720
+Epoch 8/15: Loss=4.348656
+Epoch 9/15: Loss=4.291454
+Epoch 10/15: Loss=4.220531
+Epoch 11/15: Loss=4.141132
+Epoch 12/15: Loss=4.031883
+Epoch 13/15: Loss=3.887886
+Epoch 14/15: Loss=3.713043
+Epoch 15/15: Loss=3.522999
+Total training time: 509.0218822956085
