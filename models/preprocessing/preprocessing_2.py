@@ -8,7 +8,7 @@ from tqdm import tqdm
 import os
 
 import vitaldb
-vitaldb.login("DavidWard1999", "ThisIsMyVitalDB")
+###### Include Login for Vital #####
 
 SAMPLING_RATE = 128 
 PADDING = 4

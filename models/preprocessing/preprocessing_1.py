@@ -4,7 +4,7 @@ import pandas as pd
 import json
 
 import vitaldb
-vitaldb.login("DavidWard1999", "ThisIsMyVitalDB")
+###### Include Login for Vital #####
 
 ########################################################################################
 ################################# Collect the data set #################################
