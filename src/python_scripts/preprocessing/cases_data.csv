@@ -1,0 +1,407 @@
+caseid,optype,sex,age,asa,bmi,preop_hb,preop_k,preop_na,preop_gluc,preop_cr,preop_alb,propofol,volatile,remifentanil
+36,Breast,F,38.0,1.0,20.7,12.9,4.5,139.0,93.0,0.63,4.6,True,True,True
+100,Colorectal,F,58.0,2.0,19.6,13.9,3.8,143.0,102.0,0.79,4.1,False,True,False
+141,Breast,F,54.0,1.0,24.6,12.8,4.5,141.0,58.0,0.75,4.2,True,True,True
+169,Thyroid,F,69.0,2.0,23.0,12.8,4.0,141.0,106.0,0.68,4.2,True,True,True
+173,Colorectal,M,53.0,2.0,19.1,10.8,4.6,138.0,135.0,0.84,3.5,False,True,False
+183,Minor resection,F,28.0,2.0,23.0,14.9,4.2,139.0,95.0,0.76,4.7,False,True,True
+203,Thyroid,M,68.0,2.0,21.6,14.5,4.3,143.0,114.0,0.94,4.1,True,True,True
+223,Colorectal,F,55.0,1.0,24.2,10.9,4.1,143.0,94.0,0.66,3.8,True,False,True
+227,Biliary/Pancreas,F,78.0,2.0,25.2,13.5,4.3,140.0,198.0,0.92,3.6,True,True,True
+245,Colorectal,F,60.0,1.0,24.3,12.1,4.1,140.0,104.0,0.45,4.4,True,True,True
+248,Colorectal,F,72.0,2.0,17.3,12.8,3.8,142.0,85.0,0.63,4.1,True,True,True
+278,Breast,F,48.0,1.0,23.4,13.7,3.9,139.0,91.0,0.84,4.4,False,True,False
+288,Colorectal,M,79.0,2.0,22.5,11.6,3.9,140.0,105.0,0.93,3.9,False,True,False
+299,Others,F,36.0,2.0,19.1,9.4,3.6,139.0,97.0,0.58,3.1,False,True,False
+311,Colorectal,M,68.0,2.0,21.5,12.7,4.0,138.0,145.0,0.78,3.8,True,False,True
+331,Colorectal,F,67.0,3.0,23.5,9.9,3.3,132.0,170.0,0.39,3.6,False,True,False
+352,Biliary/Pancreas,M,39.0,2.0,25.0,16.4,4.1,141.0,96.0,1.13,4.3,True,False,True
+376,Colorectal,F,82.0,2.0,25.9,9.7,4.0,144.0,132.0,0.64,3.9,False,True,False
+420,Colorectal,M,63.0,2.0,20.8,15.7,5.0,143.0,100.0,1.27,4.7,False,True,False
+437,Breast,F,63.0,1.0,22.6,11.0,4.4,140.0,95.0,0.5,3.9,False,True,False
+454,Colorectal,F,56.0,2.0,22.3,11.8,3.7,141.0,89.0,0.54,3.5,True,False,True
+458,Others,M,68.0,2.0,22.0,13.5,4.0,142.0,262.0,0.84,3.9,False,True,True
+480,Breast,F,57.0,2.0,23.2,14.0,4.0,141.0,140.0,0.83,4.3,True,True,True
+502,Thyroid,F,51.0,2.0,23.6,10.1,3.9,140.0,92.0,0.65,4.0,True,True,True
+542,Breast,F,45.0,1.0,20.7,13.0,4.0,137.0,94.0,0.63,4.7,True,True,True
+545,Biliary/Pancreas,M,58.0,3.0,24.2,12.1,4.0,135.0,117.0,6.44,3.0,True,True,True
+546,Vascular,F,66.0,2.0,23.3,13.5,4.2,140.0,116.0,0.66,4.8,True,False,True
+547,Biliary/Pancreas,M,74.0,2.0,25.1,11.3,4.7,141.0,230.0,0.87,3.7,False,True,False
+597,Biliary/Pancreas,F,63.0,2.0,19.8,14.0,3.8,138.0,103.0,0.54,4.0,True,True,True
+604,Major resection,F,43.0,1.0,25.1,11.0,3.9,142.0,106.0,0.89,4.0,False,True,False
+615,Others,F,55.0,1.0,23.7,12.8,4.2,143.0,93.0,0.71,4.2,True,True,True
+635,Breast,F,69.0,2.0,25.3,12.8,3.8,133.0,92.0,0.51,4.0,False,True,False
+643,Stomach,F,57.0,2.0,20.8,10.4,4.8,145.0,85.0,0.72,4.3,False,True,True
+647,Colorectal,F,43.0,2.0,20.8,8.1,4.5,136.0,67.0,0.47,3.1,False,True,False
+648,Biliary/Pancreas,F,39.0,2.0,20.8,13.4,3.9,142.0,120.0,0.48,4.6,False,True,False
+695,Colorectal,F,66.0,2.0,23.4,13.9,3.9,143.0,58.0,0.73,3.9,False,True,False
+710,Colorectal,F,78.0,2.0,20.8,12.0,3.9,145.0,112.0,0.66,4.2,True,True,True
+712,Breast,F,44.0,1.0,19.0,13.6,4.6,141.0,102.0,0.66,4.8,True,True,True
+717,Breast,F,55.0,2.0,32.6,14.4,3.9,138.0,103.0,0.71,4.4,False,True,False
+718,Colorectal,F,59.0,3.0,20.1,9.9,4.0,136.0,68.0,0.53,2.7,True,True,True
+735,Colorectal,M,53.0,2.0,20.7,13.4,4.4,139.0,91.0,0.8,4.1,False,True,True
+747,Minor resection,M,67.0,2.0,24.2,12.8,4.0,140.0,97.0,1.57,4.4,True,False,True
+766,Thyroid,F,59.0,2.0,25.1,12.0,4.2,141.0,91.0,0.61,4.3,True,True,True
+786,Biliary/Pancreas,M,63.0,2.0,25.8,15.5,4.4,138.0,107.0,0.76,4.2,True,False,True
+797,Biliary/Pancreas,F,58.0,2.0,26.2,11.7,4.3,141.0,119.0,0.86,4.5,False,True,True
+805,Colorectal,M,74.0,2.0,25.8,13.1,4.0,141.0,126.0,0.74,4.3,True,False,True
+879,Minor resection,F,42.0,1.0,18.7,13.8,4.1,141.0,109.0,0.72,4.7,False,True,False
+891,Biliary/Pancreas,F,32.0,1.0,19.5,13.7,4.2,140.0,77.0,0.74,4.8,False,True,True
+893,Colorectal,F,64.0,1.0,27.0,14.2,4.1,138.0,108.0,0.83,4.2,False,True,True
+901,Biliary/Pancreas,F,44.0,2.0,24.6,12.5,4.3,138.0,141.0,0.71,4.8,False,True,False
+903,Colorectal,M,55.0,1.0,21.1,14.7,4.6,137.0,93.0,1.02,3.7,False,True,False
+905,Breast,F,35.0,2.0,19.8,12.7,4.2,140.0,85.0,0.48,3.7,True,True,True
+925,Others,M,50.0,2.0,23.3,15.6,3.9,140.0,109.0,0.94,4.3,True,True,True
+934,Breast,F,56.0,1.0,19.5,13.6,4.2,142.0,87.0,0.63,4.4,True,True,True
+943,Biliary/Pancreas,F,43.0,1.0,19.3,14.7,3.9,139.0,95.0,0.71,4.6,True,True,True
+961,Colorectal,M,72.0,2.0,26.7,13.1,4.8,137.0,124.0,1.15,3.8,True,True,True
+973,Colorectal,M,69.0,2.0,26.1,14.5,4.8,141.0,134.0,1.23,4.2,False,True,False
+974,Others,M,74.0,2.0,24.1,11.4,4.7,139.0,113.0,1.54,3.8,True,True,True
+977,Biliary/Pancreas,F,56.0,2.0,23.0,13.9,4.0,142.0,94.0,0.77,4.3,False,True,False
+987,Biliary/Pancreas,F,49.0,1.0,20.8,11.0,4.2,138.0,100.0,0.65,4.3,False,True,False
+994,Major resection,F,58.0,1.0,26.0,13.8,4.2,140.0,108.0,0.72,4.3,False,True,False
+1015,Major resection,F,47.0,2.0,23.8,12.6,4.4,141.0,97.0,0.91,4.3,False,True,False
+1064,Biliary/Pancreas,F,55.0,3.0,22.3,14.3,4.1,139.0,94.0,0.81,4.2,True,True,True
+1071,Breast,F,58.0,2.0,24.1,14.4,4.2,139.0,104.0,0.76,4.6,True,False,True
+1101,Breast,F,41.0,1.0,22.5,13.7,4.6,139.0,98.0,0.65,4.5,True,True,True
+1106,Breast,F,47.0,1.0,18.5,14.6,4.1,139.0,95.0,0.68,4.3,True,True,True
+1116,Stomach,M,73.0,2.0,19.5,15.4,4.4,140.0,136.0,1.0,4.0,False,True,False
+1122,Biliary/Pancreas,F,56.0,3.0,23.6,13.7,4.1,139.0,101.0,0.46,4.3,True,False,True
+1156,Colorectal,F,82.0,3.0,21.0,11.0,4.0,140.0,71.0,0.6,3.7,False,True,True
+1158,Biliary/Pancreas,F,42.0,1.0,18.3,10.6,3.8,145.0,81.0,0.83,4.1,False,True,False
+1162,Minor resection,F,81.0,2.0,21.4,11.0,4.5,139.0,127.0,1.0,3.9,False,True,True
+1196,Minor resection,F,64.0,2.0,22.6,14.7,3.5,141.0,128.0,0.6,4.1,True,True,True
+1226,Breast,F,43.0,1.0,21.7,13.2,4.0,140.0,89.0,0.68,4.0,True,True,True
+1251,Breast,F,53.0,2.0,24.3,9.4,4.0,141.0,93.0,0.54,3.6,True,True,True
+1253,Biliary/Pancreas,M,57.0,2.0,27.0,15.4,4.2,142.0,83.0,0.92,3.6,False,True,False
+1266,Breast,F,51.0,1.0,23.2,10.7,3.7,139.0,96.0,0.7,3.9,False,True,True
+1270,Colorectal,M,33.0,1.0,18.3,14.6,4.2,141.0,104.0,0.92,4.5,True,False,True
+1271,Thyroid,F,47.0,2.0,23.5,13.1,3.9,140.0,95.0,0.57,4.3,False,True,False
+1287,Vascular,F,68.0,2.0,32.7,12.2,4.1,140.0,93.0,1.11,4.4,True,False,True
+1289,Breast,F,59.0,1.0,24.1,13.1,4.0,140.0,105.0,0.58,4.6,True,True,True
+1297,Others,F,53.0,3.0,18.3,8.9,3.5,136.0,89.0,0.37,2.6,True,False,True
+1300,Others,M,40.0,3.0,22.1,14.2,4.5,141.0,105.0,0.74,4.8,True,True,True
+1314,Breast,F,39.0,1.0,24.5,13.7,4.2,138.0,106.0,0.73,4.6,False,True,False
+1322,Breast,F,52.0,2.0,24.2,12.3,4.1,140.0,110.0,0.65,4.2,True,True,True
+1326,Colorectal,M,54.0,2.0,23.6,15.1,4.2,141.0,107.0,0.83,4.2,False,True,False
+1330,Colorectal,M,39.0,2.0,25.2,14.8,4.1,140.0,125.0,0.59,3.7,True,True,True
+1334,Biliary/Pancreas,F,48.0,1.0,26.9,12.9,4.3,140.0,90.0,0.67,4.1,True,True,True
+1349,Breast,F,78.0,2.0,23.9,12.2,4.5,137.0,122.0,0.66,4.1,True,True,True
+1369,Biliary/Pancreas,M,60.0,2.0,28.4,13.8,3.6,140.0,144.0,0.97,4.1,True,True,True
+1372,Colorectal,M,82.0,3.0,21.8,9.5,4.4,141.0,92.0,1.02,3.6,True,True,True
+1418,Stomach,M,53.0,1.0,21.4,14.3,3.9,140.0,131.0,0.97,4.0,True,False,True
+1427,Breast,F,55.0,1.0,27.2,10.9,4.2,142.0,132.0,0.59,3.9,False,True,True
+1433,Biliary/Pancreas,M,69.0,2.0,22.4,7.5,4.4,138.0,97.0,0.72,3.5,False,True,False
+1438,Colorectal,F,87.0,2.0,22.2,9.0,3.9,138.0,103.0,0.8,3.4,False,True,True
+1445,Others,F,51.0,2.0,19.4,8.9,3.7,138.0,91.0,0.71,3.3,False,True,False
+1447,Thyroid,M,65.0,2.0,21.8,16.7,4.0,141.0,93.0,0.83,4.3,True,True,True
+1459,Colorectal,M,68.0,2.0,20.8,12.5,4.2,141.0,117.0,0.83,4.3,False,True,True
+1470,Minor resection,F,64.0,1.0,23.3,13.3,4.4,141.0,113.0,0.75,4.3,False,True,False
+1495,Breast,F,58.0,2.0,26.8,13.2,5.4,141.0,132.0,1.15,4.7,False,True,False
+1514,Biliary/Pancreas,M,34.0,1.0,24.9,15.6,4.1,142.0,100.0,0.87,5.2,False,True,False
+1533,Colorectal,M,66.0,2.0,23.4,13.1,4.0,144.0,147.0,0.7,3.1,True,False,True
+1550,Colorectal,F,57.0,2.0,25.2,12.4,3.7,140.0,114.0,0.66,3.7,False,True,False
+1552,Minor resection,M,63.0,2.0,27.4,12.5,4.1,143.0,182.0,0.86,4.6,True,True,True
+1570,Biliary/Pancreas,M,46.0,1.0,23.2,14.4,4.2,143.0,130.0,1.0,4.2,True,True,True
+1587,Thyroid,F,51.0,1.0,23.7,13.4,4.4,138.0,99.0,0.75,4.5,True,True,True
+1588,Breast,F,52.0,1.0,20.5,12.3,3.6,144.0,125.0,0.62,4.3,True,True,True
+1596,Biliary/Pancreas,M,54.0,2.0,22.8,14.8,4.4,138.0,233.0,0.95,4.5,False,True,True
+1600,Biliary/Pancreas,M,71.0,2.0,25.3,14.2,4.0,143.0,124.0,1.39,3.8,True,True,True
+1607,Breast,F,62.0,1.0,27.3,13.1,4.6,141.0,95.0,0.64,4.7,True,True,True
+1650,Colorectal,F,64.0,2.0,29.8,14.6,4.7,140.0,147.0,0.76,4.4,True,False,True
+1651,Biliary/Pancreas,F,51.0,2.0,23.8,13.3,3.5,140.0,112.0,0.77,4.5,False,True,False
+1663,Breast,F,59.0,2.0,22.9,13.5,3.9,141.0,121.0,0.68,4.9,True,True,True
+1670,Stomach,M,55.0,2.0,24.7,15.1,4.6,138.0,100.0,1.09,4.0,True,True,True
+1713,Colorectal,M,62.0,1.0,23.0,16.4,3.7,140.0,85.0,0.74,4.3,True,False,True
+1744,Colorectal,M,56.0,2.0,21.7,13.1,5.0,141.0,92.0,1.15,4.4,True,False,True
+1746,Thyroid,F,54.0,2.0,21.9,13.6,3.9,138.0,101.0,0.54,4.3,False,True,False
+1760,Breast,F,59.0,2.0,31.6,12.3,4.6,141.0,105.0,0.81,4.3,False,True,False
+1782,Breast,F,43.0,1.0,30.0,12.5,4.1,138.0,111.0,0.58,3.7,False,True,False
+1791,Thyroid,F,54.0,2.0,23.2,13.4,4.3,136.0,108.0,0.54,4.2,True,False,True
+1808,Biliary/Pancreas,F,53.0,1.0,22.9,12.4,4.3,141.0,131.0,0.63,4.1,False,True,False
+1910,Minor resection,F,78.0,3.0,27.9,13.7,4.6,142.0,97.0,0.66,4.0,False,True,True
+1989,Biliary/Pancreas,M,71.0,1.0,24.5,16.9,4.2,139.0,157.0,0.97,4.1,True,True,True
+1994,Others,M,58.0,2.0,17.7,10.4,3.9,141.0,103.0,0.97,3.7,True,True,True
+1998,Colorectal,M,57.0,2.0,25.5,13.8,4.2,142.0,93.0,1.01,4.2,False,True,False
+2013,Biliary/Pancreas,M,77.0,2.0,27.8,12.0,3.7,142.0,89.0,0.89,3.5,False,True,False
+2025,Minor resection,F,70.0,3.0,23.6,12.9,4.4,138.0,87.0,1.06,3.9,True,False,True
+2046,Minor resection,F,44.0,2.0,23.0,11.1,4.6,143.0,91.0,0.79,4.5,True,True,True
+2048,Breast,F,74.0,2.0,25.4,13.8,3.8,139.0,103.0,0.9,4.4,True,True,True
+2058,Others,F,32.0,1.0,23.8,13.7,4.1,139.0,95.0,0.56,4.5,True,True,True
+2084,Colorectal,M,69.0,2.0,24.3,12.2,4.2,142.0,106.0,1.14,4.0,True,False,True
+2097,Biliary/Pancreas,F,59.0,2.0,23.9,12.3,3.9,142.0,90.0,0.72,3.9,True,False,True
+2101,Thyroid,F,59.0,2.0,19.7,12.5,5.1,140.0,100.0,0.69,4.7,True,True,True
+2102,Colorectal,M,58.0,2.0,26.1,14.5,4.2,142.0,100.0,0.83,4.1,True,True,True
+2110,Thyroid,M,47.0,1.0,24.2,15.9,4.7,141.0,110.0,0.96,4.6,False,True,True
+2143,Breast,F,36.0,2.0,22.0,11.1,4.1,140.0,83.0,0.9,3.5,False,True,False
+2148,Others,F,52.0,2.0,25.2,13.7,3.9,140.0,83.0,0.69,4.2,True,False,True
+2167,Breast,F,46.0,2.0,21.1,12.5,4.3,138.0,103.0,0.84,4.5,False,True,False
+2178,Minor resection,F,55.0,2.0,22.4,12.4,4.5,142.0,96.0,0.6,4.6,False,True,False
+2188,Biliary/Pancreas,M,63.0,2.0,25.2,14.4,4.8,139.0,105.0,1.28,4.5,False,True,False
+2198,Others,M,69.0,2.0,25.1,14.7,4.6,143.0,93.0,1.25,4.2,True,True,True
+2208,Biliary/Pancreas,F,53.0,1.0,23.4,13.2,3.9,139.0,90.0,0.72,4.5,True,False,True
+2217,Breast,F,46.0,1.0,18.8,13.1,4.1,142.0,98.0,1.04,4.2,True,True,True
+2218,Thyroid,M,61.0,2.0,24.8,13.1,4.5,145.0,138.0,1.32,3.8,True,True,True
+2226,Breast,F,54.0,2.0,25.4,12.9,4.1,143.0,101.0,0.79,4.3,False,True,False
+2232,Biliary/Pancreas,M,54.0,2.0,26.8,15.0,4.6,141.0,109.0,0.84,4.4,True,True,True
+2257,Thyroid,F,55.0,1.0,30.6,13.6,3.9,142.0,128.0,0.69,4.3,True,True,True
+2259,Biliary/Pancreas,M,65.0,2.0,20.2,14.7,4.1,131.0,172.0,0.67,3.9,True,False,True
+2260,Biliary/Pancreas,M,69.0,2.0,26.6,15.7,5.1,140.0,131.0,0.92,4.6,False,True,False
+2274,Biliary/Pancreas,M,61.0,2.0,22.0,14.4,4.1,141.0,145.0,1.03,4.5,False,True,False
+2288,Breast,F,23.0,1.0,21.2,13.9,4.1,140.0,95.0,0.62,4.3,True,False,True
+2289,Others,F,41.0,1.0,24.4,12.6,4.3,139.0,91.0,0.72,4.3,True,False,True
+2290,Biliary/Pancreas,M,62.0,2.0,25.2,13.7,3.9,145.0,105.0,0.86,4.1,True,True,True
+2294,Biliary/Pancreas,F,56.0,2.0,22.0,12.9,3.7,142.0,102.0,0.53,4.3,True,False,True
+2329,Colorectal,F,43.0,1.0,23.9,12.2,4.1,141.0,115.0,0.61,3.8,False,True,False
+2374,Colorectal,M,66.0,2.0,22.0,8.9,4.5,135.0,154.0,1.25,3.9,True,False,True
+2384,Biliary/Pancreas,F,37.0,1.0,23.9,14.0,5.1,141.0,102.0,0.62,4.6,True,True,True
+2387,Colorectal,F,55.0,1.0,23.7,11.0,3.8,146.0,92.0,0.77,4.1,True,True,True
+2404,Breast,F,39.0,2.0,24.0,11.9,4.2,140.0,102.0,0.74,4.2,True,True,True
+2406,Breast,F,64.0,2.0,24.1,11.8,4.1,141.0,93.0,0.63,4.0,True,True,True
+2439,Biliary/Pancreas,F,46.0,1.0,25.3,11.8,4.0,140.0,83.0,0.65,4.4,False,True,False
+2451,Colorectal,F,72.0,2.0,22.1,10.5,4.7,138.0,126.0,0.59,3.7,False,True,True
+2460,Major resection,F,60.0,2.0,25.2,12.0,3.6,141.0,86.0,0.6,3.7,False,False,False
+2473,Minor resection,F,47.0,2.0,22.3,11.7,4.6,142.0,109.0,0.65,4.2,False,True,False
+2485,Major resection,F,63.0,2.0,25.8,13.5,3.8,135.0,133.0,0.68,4.0,False,True,True
+2511,Others,M,47.0,1.0,21.5,16.1,4.6,140.0,78.0,1.08,4.5,True,True,True
+2518,Breast,F,49.0,2.0,22.8,12.9,4.6,141.0,94.0,0.54,4.3,True,True,True
+2524,Colorectal,F,50.0,2.0,19.4,11.5,4.3,139.0,86.0,0.8,3.6,True,False,True
+2535,Stomach,F,55.0,2.0,15.5,12.5,3.9,139.0,77.0,0.58,3.7,False,True,True
+2536,Others,F,50.0,2.0,23.5,13.4,4.3,141.0,103.0,0.7,4.2,False,True,False
+2546,Biliary/Pancreas,F,59.0,2.0,29.5,14.6,4.6,141.0,104.0,0.67,4.6,True,False,True
+2555,Colorectal,F,67.0,1.0,25.2,12.2,3.8,141.0,124.0,0.71,4.1,True,True,True
+2576,Minor resection,F,59.0,1.0,25.0,12.5,4.3,138.0,88.0,0.65,3.7,True,True,True
+2603,Breast,F,60.0,2.0,31.9,13.7,4.3,142.0,179.0,0.54,4.3,True,True,True
+2623,Others,F,79.0,2.0,21.3,9.1,4.7,138.0,132.0,0.72,2.7,True,True,True
+2643,Breast,F,42.0,2.0,16.6,14.0,3.6,141.0,101.0,0.48,4.3,False,True,False
+2666,Breast,F,69.0,1.0,21.3,12.5,4.6,141.0,172.0,0.68,4.2,True,True,True
+2669,Colorectal,M,49.0,2.0,22.6,13.5,4.3,142.0,184.0,0.62,4.2,False,True,False
+2723,Biliary/Pancreas,M,40.0,1.0,20.7,15.2,4.1,141.0,91.0,0.86,4.5,False,True,False
+2739,Breast,F,48.0,1.0,23.5,12.9,4.1,139.0,91.0,0.63,4.3,False,True,True
+2758,Biliary/Pancreas,F,66.0,2.0,26.8,13.2,4.7,141.0,88.0,0.57,3.9,True,True,True
+2770,Colorectal,F,48.0,2.0,22.6,11.3,4.2,139.0,99.0,0.68,3.8,True,True,True
+2833,Biliary/Pancreas,M,54.0,2.0,26.4,15.1,3.8,139.0,83.0,0.82,4.3,False,True,False
+2841,Breast,F,47.0,1.0,23.8,10.8,3.9,142.0,134.0,0.63,3.9,False,True,False
+2865,Breast,F,55.0,2.0,28.1,13.7,4.4,136.0,119.0,0.64,3.5,True,True,True
+2867,Breast,F,52.0,1.0,21.5,11.6,4.4,142.0,104.0,0.64,3.5,True,True,True
+2892,Colorectal,M,65.0,2.0,21.8,11.3,4.3,139.0,138.0,0.75,4.3,True,True,True
+2895,Colorectal,F,67.0,1.0,26.7,13.5,3.8,142.0,97.0,0.61,4.3,True,False,True
+2896,Biliary/Pancreas,F,60.0,1.0,21.3,12.7,4.8,141.0,101.0,0.61,4.5,True,True,True
+2901,Others,F,32.0,1.0,25.7,11.0,4.0,139.0,118.0,0.61,3.9,False,True,True
+2903,Minor resection,F,56.0,1.0,20.0,11.8,4.7,140.0,102.0,0.69,4.2,False,True,False
+2917,Breast,F,57.0,2.0,22.5,12.1,3.6,140.0,105.0,0.56,4.5,False,True,False
+2918,Colorectal,M,66.0,1.0,25.7,14.5,4.6,143.0,98.0,0.77,3.8,True,False,True
+2941,Colorectal,M,46.0,1.0,22.4,13.8,4.0,140.0,98.0,1.07,4.0,True,True,True
+2969,Others,F,48.0,1.0,21.5,12.8,3.9,140.0,112.0,0.67,4.3,False,True,False
+2979,Colorectal,M,66.0,2.0,22.3,14.6,4.1,140.0,169.0,0.64,4.3,True,False,True
+2998,Others,F,32.0,1.0,22.2,14.0,3.8,144.0,91.0,0.69,4.5,True,True,True
+3003,Others,M,22.0,1.0,32.6,15.3,4.2,142.0,89.0,0.87,4.6,True,True,True
+3011,Colorectal,F,75.0,2.0,27.8,10.4,4.5,138.0,61.0,0.77,4.5,False,True,True
+3049,Colorectal,F,69.0,2.0,23.9,11.7,4.1,138.0,114.0,0.88,4.4,True,False,True
+3054,Major resection,F,28.0,2.0,18.3,11.9,3.9,140.0,93.0,0.7,4.2,False,True,False
+3056,Biliary/Pancreas,M,33.0,2.0,26.5,16.2,3.5,139.0,119.0,0.94,4.2,True,True,True
+3057,Major resection,F,27.0,2.0,20.8,12.8,4.3,140.0,92.0,0.58,4.2,False,True,False
+3100,Breast,F,48.0,2.0,22.5,12.3,4.2,136.0,95.0,0.59,4.3,True,True,True
+3104,Stomach,F,47.0,2.0,19.8,9.4,4.4,140.0,101.0,0.82,4.3,False,True,False
+3123,Colorectal,F,47.0,1.0,23.1,12.2,4.2,142.0,142.0,0.74,4.3,False,True,False
+3126,Minor resection,M,56.0,2.0,26.3,12.6,4.2,139.0,99.0,1.27,4.0,True,False,True
+3141,Minor resection,M,56.0,1.0,24.6,13.3,3.9,141.0,88.0,1.06,4.0,False,True,False
+3144,Colorectal,F,50.0,2.0,30.0,14.4,4.0,143.0,97.0,0.61,4.5,True,True,True
+3151,Biliary/Pancreas,M,51.0,2.0,25.2,14.6,4.1,139.0,136.0,0.69,4.2,False,True,False
+3174,Breast,F,50.0,2.0,25.2,14.3,3.8,142.0,106.0,0.44,4.7,True,True,True
+3176,Colorectal,M,63.0,2.0,23.3,9.3,4.1,137.0,115.0,1.31,2.6,True,False,True
+3178,Colorectal,M,67.0,2.0,26.7,13.8,3.8,141.0,101.0,0.76,4.1,True,False,True
+3182,Breast,F,50.0,1.0,24.4,13.8,4.1,140.0,106.0,0.66,4.7,True,True,True
+3187,Breast,F,43.0,2.0,26.3,11.4,4.3,142.0,107.0,0.79,4.0,True,True,True
+3190,Thyroid,F,51.0,1.0,19.8,13.5,4.2,141.0,96.0,0.66,4.5,True,True,True
+3245,Colorectal,F,51.0,1.0,29.8,11.2,3.8,140.0,85.0,0.64,4.1,True,False,True
+3251,Colorectal,M,65.0,2.0,22.7,11.1,4.6,135.0,109.0,1.01,2.8,False,True,False
+3276,Major resection,F,35.0,1.0,20.1,12.5,4.0,139.0,96.0,0.64,4.5,False,True,False
+3301,Colorectal,M,46.0,2.0,25.6,14.9,3.9,140.0,135.0,0.94,4.5,True,False,True
+3308,Biliary/Pancreas,M,41.0,1.0,28.6,17.3,4.3,140.0,102.0,0.93,4.6,False,True,False
+3339,Breast,F,62.0,2.0,21.6,13.8,4.1,141.0,111.0,0.47,4.4,True,True,True
+3362,Colorectal,F,59.0,2.0,26.6,11.8,3.9,143.0,102.0,0.89,4.1,False,True,False
+3432,Biliary/Pancreas,M,39.0,2.0,23.2,15.0,4.2,138.0,113.0,0.92,5.0,True,True,True
+3467,Thyroid,F,48.0,1.0,21.2,12.8,4.5,140.0,100.0,0.74,4.5,True,True,True
+3472,Minor resection,M,59.0,2.0,24.8,13.0,4.0,142.0,125.0,1.2,3.6,True,True,True
+3504,Colorectal,F,74.0,2.0,21.1,9.4,4.5,138.0,167.0,0.79,3.8,False,True,False
+3511,Breast,F,62.0,2.0,27.8,11.2,3.7,142.0,87.0,0.53,3.8,False,True,False
+3523,Breast,F,48.0,1.0,21.8,11.3,4.1,141.0,95.0,0.51,3.9,True,True,True
+3536,Breast,F,51.0,1.0,21.7,12.7,4.3,140.0,92.0,0.74,4.2,True,False,True
+3561,Biliary/Pancreas,M,48.0,2.0,21.1,14.4,4.1,140.0,90.0,0.95,4.2,True,True,True
+3575,Biliary/Pancreas,F,39.0,1.0,20.0,12.0,4.1,137.0,97.0,0.61,4.7,True,True,True
+3581,Colorectal,F,55.0,1.0,22.1,11.4,5.2,142.0,110.0,0.62,4.1,True,True,True
+3583,Breast,F,34.0,2.0,22.7,10.4,4.5,142.0,94.0,0.46,4.1,True,False,True
+3586,Breast,F,40.0,2.0,21.9,13.3,4.6,138.0,99.0,0.74,4.7,False,True,False
+3590,Biliary/Pancreas,M,67.0,2.0,19.1,12.8,4.2,134.0,245.0,0.76,4.0,True,True,True
+3598,Biliary/Pancreas,F,61.0,1.0,28.6,11.9,4.1,140.0,180.0,0.82,3.8,True,True,True
+3615,Breast,F,46.0,2.0,18.1,10.8,4.3,141.0,98.0,0.65,4.3,True,False,True
+3633,Biliary/Pancreas,F,57.0,1.0,22.9,14.6,4.6,140.0,101.0,0.64,4.4,False,True,False
+3634,Colorectal,F,31.0,2.0,18.1,12.0,2.9,142.0,75.0,0.38,3.1,True,True,True
+3648,Biliary/Pancreas,M,51.0,2.0,27.6,13.9,3.9,141.0,112.0,0.84,3.7,True,False,True
+3653,Biliary/Pancreas,F,45.0,2.0,23.4,13.1,4.2,141.0,136.0,0.68,4.5,True,False,True
+3655,Thyroid,F,50.0,2.0,19.3,13.6,4.5,143.0,123.0,0.69,4.9,True,False,True
+3673,Biliary/Pancreas,F,39.0,2.0,35.2,13.6,3.9,141.0,101.0,0.63,4.3,False,True,False
+3675,Colorectal,F,77.0,2.0,24.2,10.3,4.6,140.0,109.0,0.99,3.9,False,True,False
+3683,Biliary/Pancreas,M,67.0,2.0,26.3,13.2,4.2,143.0,88.0,1.28,3.7,True,True,True
+3708,Breast,F,73.0,3.0,25.3,12.9,5.4,139.0,119.0,0.72,4.5,False,True,False
+3738,Biliary/Pancreas,F,35.0,1.0,25.6,13.4,4.3,136.0,85.0,0.67,4.4,False,True,False
+3746,Biliary/Pancreas,M,27.0,1.0,22.0,16.8,4.5,141.0,92.0,0.96,4.6,False,True,False
+3756,Breast,F,41.0,1.0,22.2,14.2,4.0,140.0,84.0,0.65,4.5,False,True,False
+3766,Breast,F,72.0,1.0,27.5,12.3,4.5,145.0,112.0,0.99,4.5,True,True,True
+3776,Minor resection,F,49.0,2.0,25.6,11.4,4.7,140.0,103.0,0.8,4.2,False,True,False
+3811,Breast,F,39.0,1.0,23.3,13.9,4.2,136.0,104.0,0.51,4.7,True,False,True
+3847,Others,F,42.0,1.0,21.8,14.5,3.9,138.0,97.0,0.64,4.8,False,True,False
+3856,Breast,F,55.0,1.0,22.9,13.8,4.0,137.0,98.0,0.68,4.2,True,True,True
+3894,Stomach,M,64.0,2.0,21.1,14.9,4.5,141.0,95.0,0.87,4.6,False,True,True
+3900,Stomach,F,48.0,2.0,23.9,13.4,4.3,142.0,103.0,0.6,4.5,False,True,True
+3932,Others,M,76.0,2.0,21.4,11.5,5.0,137.0,96.0,0.86,3.6,True,True,True
+3937,Major resection,F,28.0,1.0,22.0,13.0,4.1,139.0,82.0,0.68,4.4,False,True,True
+3951,Breast,F,40.0,1.0,21.5,12.1,3.9,138.0,87.0,0.56,4.3,True,False,True
+4044,Breast,F,42.0,1.0,19.2,12.0,4.2,136.0,101.0,0.51,4.5,False,True,False
+4047,Others,M,73.0,3.0,21.7,12.8,4.1,140.0,175.0,0.98,3.9,False,True,False
+4065,Major resection,F,29.0,1.0,21.4,12.1,3.9,140.0,88.0,0.65,4.6,False,True,False
+4069,Others,M,51.0,2.0,23.9,15.4,4.1,141.0,103.0,0.93,4.6,True,False,True
+4079,Biliary/Pancreas,F,43.0,1.0,22.3,13.2,3.8,141.0,110.0,0.79,4.3,False,True,False
+4084,Thyroid,F,64.0,1.0,24.8,12.1,4.0,141.0,90.0,0.61,4.3,True,True,True
+4085,Thyroid,M,34.0,2.0,25.9,16.3,4.5,142.0,97.0,0.94,5.0,True,True,True
+4104,Colorectal,M,63.0,1.0,23.8,13.6,4.2,139.0,100.0,1.01,4.2,False,True,False
+4123,Vascular,M,56.0,1.0,24.7,15.1,4.2,138.0,107.0,0.78,4.1,True,True,True
+4129,Biliary/Pancreas,F,38.0,1.0,27.2,12.1,4.1,139.0,86.0,0.71,4.3,True,True,True
+4142,Major resection,M,48.0,2.0,21.7,12.8,4.4,141.0,138.0,0.57,4.2,True,True,True
+4180,Breast,F,45.0,1.0,20.9,13.2,4.0,140.0,89.0,0.79,4.3,False,True,True
+4209,Biliary/Pancreas,M,52.0,1.0,25.9,16.2,4.5,142.0,96.0,0.93,4.6,False,True,False
+4223,Major resection,F,62.0,2.0,33.1,13.2,4.0,142.0,101.0,0.61,4.8,False,True,True
+4224,Colorectal,F,77.0,1.0,22.5,10.7,3.8,142.0,91.0,0.62,3.9,True,True,True
+4273,Thyroid,F,58.0,2.0,18.7,13.0,3.9,140.0,89.0,0.83,4.2,True,False,True
+4274,Breast,F,48.0,2.0,22.3,10.6,4.3,139.0,89.0,0.58,3.7,True,True,True
+4332,Minor resection,F,58.0,1.0,23.4,12.5,3.8,143.0,124.0,0.55,4.0,False,True,True
+4352,Minor resection,F,64.0,1.0,29.9,15.4,4.1,143.0,104.0,0.71,4.5,False,False,False
+4365,Breast,F,35.0,2.0,24.9,11.3,3.9,143.0,128.0,0.56,3.7,True,True,True
+4422,Breast,F,71.0,2.0,24.4,13.9,4.9,138.0,93.0,0.89,4.7,True,True,True
+4447,Colorectal,F,77.0,2.0,26.4,13.0,4.3,137.0,133.0,0.77,4.6,True,True,True
+4500,Biliary/Pancreas,M,75.0,4.0,30.2,15.1,4.9,138.0,238.0,0.97,4.2,False,True,True
+4506,Colorectal,M,89.0,2.0,20.6,13.6,4.5,139.0,124.0,0.85,4.1,True,False,True
+4521,Breast,F,48.0,1.0,22.9,12.7,3.7,141.0,95.0,0.63,4.0,True,True,True
+4528,Colorectal,M,58.0,2.0,22.6,14.2,4.8,140.0,88.0,1.17,4.2,False,True,False
+4539,Breast,F,66.0,1.0,27.1,16.3,4.5,143.0,103.0,0.67,4.5,False,True,False
+4543,Breast,F,42.0,1.0,18.3,11.9,3.8,142.0,91.0,0.77,4.4,False,True,False
+4544,Breast,F,58.0,1.0,22.2,14.1,4.1,142.0,94.0,0.94,4.3,False,True,False
+4557,Biliary/Pancreas,F,47.0,2.0,24.4,11.3,4.1,137.0,95.0,0.77,4.2,False,True,True
+4569,Colorectal,M,75.0,3.0,23.7,14.0,6.0,137.0,102.0,0.88,4.5,False,True,True
+4575,Colorectal,M,61.0,2.0,23.5,13.0,3.7,137.0,228.0,0.73,3.9,True,True,True
+4581,Colorectal,F,58.0,2.0,24.6,11.6,4.4,144.0,99.0,0.6,4.6,True,True,True
+4585,Colorectal,F,59.0,1.0,19.8,13.5,3.8,144.0,96.0,0.54,4.2,True,True,True
+4586,Others,F,43.0,2.0,21.6,14.6,4.4,143.0,86.0,0.52,4.4,True,True,True
+4601,Colorectal,F,59.0,2.0,28.5,11.0,4.6,139.0,150.0,0.66,4.0,False,True,False
+4625,Colorectal,M,64.0,2.0,26.1,10.6,4.3,134.0,213.0,1.06,3.1,True,True,True
+4648,Vascular,M,65.0,2.0,22.4,10.7,5.4,135.0,91.0,1.7,4.4,False,True,True
+4667,Breast,F,56.0,1.0,19.6,11.6,4.6,143.0,89.0,0.64,4.2,True,True,True
+4682,Biliary/Pancreas,M,51.0,2.0,25.1,16.3,4.5,136.0,87.0,0.98,3.9,True,False,True
+4685,Colorectal,M,69.0,2.0,25.2,9.9,4.3,136.0,55.0,0.63,3.1,True,False,True
+4705,Others,M,75.0,2.0,24.9,14.6,4.1,141.0,107.0,0.87,4.3,True,False,True
+4710,Breast,F,50.0,2.0,24.6,14.5,4.1,139.0,103.0,0.53,4.2,False,True,False
+4736,Colorectal,M,68.0,3.0,23.5,13.2,3.9,140.0,100.0,0.7,4.1,False,True,True
+4738,Colorectal,M,67.0,2.0,24.9,13.9,4.5,141.0,165.0,0.87,4.1,True,True,True
+4761,Major resection,F,46.0,1.0,26.3,13.7,4.3,136.0,94.0,0.66,4.3,False,True,True
+4763,Minor resection,M,18.0,2.0,16.3,17.4,4.2,139.0,80.0,0.94,5.1,True,True,True
+4766,Biliary/Pancreas,F,52.0,2.0,27.9,12.5,3.9,141.0,131.0,0.72,4.0,False,True,False
+4776,Colorectal,F,27.0,2.0,17.4,10.4,3.8,136.0,89.0,0.49,3.6,False,True,True
+4811,Colorectal,M,73.0,1.0,26.4,13.4,3.7,135.0,102.0,0.8,4.3,True,True,True
+4812,Biliary/Pancreas,F,58.0,1.0,33.3,13.0,4.5,141.0,116.0,0.64,4.2,True,False,True
+4819,Biliary/Pancreas,F,62.0,1.0,24.5,14.4,4.3,139.0,116.0,0.73,4.4,False,True,False
+4847,Others,F,42.0,2.0,14.4,10.4,5.0,134.0,96.0,0.39,3.1,False,True,False
+4855,Colorectal,F,60.0,2.0,16.8,10.5,4.3,135.0,316.0,0.76,3.6,True,True,True
+4866,Colorectal,M,75.0,2.0,21.1,12.0,4.5,139.0,72.0,0.76,3.9,True,True,True
+4877,Thyroid,F,55.0,1.0,25.3,13.3,3.9,141.0,101.0,0.76,4.3,True,True,True
+4885,Colorectal,M,73.0,2.0,22.6,11.9,4.3,142.0,91.0,0.93,3.7,True,True,True
+4890,Biliary/Pancreas,M,69.0,1.0,25.1,14.7,4.1,143.0,113.0,0.95,4.4,False,True,False
+4903,Biliary/Pancreas,M,50.0,3.0,25.0,11.6,3.4,142.0,96.0,0.55,3.8,True,True,True
+4931,Colorectal,M,71.0,3.0,20.7,11.5,3.9,137.0,214.0,0.78,3.2,False,True,False
+4963,Minor resection,M,21.0,1.0,29.6,13.7,4.4,141.0,103.0,0.98,4.6,False,True,False
+4980,Breast,F,46.0,2.0,18.2,12.9,4.0,139.0,103.0,0.67,4.6,True,True,True
+4996,Biliary/Pancreas,F,58.0,1.0,19.1,13.2,4.0,144.0,96.0,0.83,4.9,True,True,True
+5007,Thyroid,F,51.0,2.0,20.5,12.6,3.8,138.0,92.0,0.73,4.4,False,True,False
+5066,Biliary/Pancreas,F,23.0,1.0,23.5,13.0,4.2,140.0,90.0,0.67,4.5,True,False,True
+5113,Breast,F,50.0,2.0,27.9,9.8,4.2,136.0,129.0,0.51,3.5,True,True,True
+5121,Biliary/Pancreas,M,48.0,1.0,28.6,16.5,4.0,140.0,83.0,0.87,4.4,True,True,True
+5123,Breast,F,30.0,1.0,21.6,13.8,4.2,142.0,96.0,0.72,4.4,True,False,True
+5124,Biliary/Pancreas,M,70.0,3.0,25.1,12.7,4.7,140.0,162.0,1.12,3.8,False,True,False
+5156,Minor resection,F,41.0,2.0,22.2,10.8,3.6,135.0,98.0,0.61,4.0,False,False,False
+5170,Colorectal,M,61.0,2.0,17.7,11.7,3.7,139.0,141.0,0.65,3.3,False,True,False
+5171,Biliary/Pancreas,F,52.0,2.0,14.3,10.5,4.3,139.0,146.0,0.35,3.5,False,True,False
+5208,Breast,F,48.0,1.0,21.6,12.6,4.2,141.0,114.0,0.79,4.6,True,True,True
+5228,Biliary/Pancreas,F,64.0,2.0,26.3,14.7,4.3,143.0,79.0,0.65,4.1,False,True,False
+5231,Biliary/Pancreas,F,79.0,1.0,28.2,11.5,4.4,143.0,113.0,0.83,3.8,True,True,True
+5238,Others,F,41.0,1.0,22.9,13.8,4.4,139.0,98.0,0.66,4.7,False,True,False
+5240,Breast,F,32.0,2.0,19.5,12.4,4.4,140.0,90.0,0.69,4.5,False,True,False
+5248,Thyroid,F,52.0,2.0,22.8,13.4,4.1,139.0,97.0,0.84,4.1,True,True,True
+5280,Minor resection,F,39.0,2.0,24.7,13.1,5.0,139.0,111.0,0.64,4.5,False,True,False
+5286,Biliary/Pancreas,F,50.0,1.0,22.3,14.6,3.9,138.0,97.0,0.62,4.4,False,True,True
+5288,Biliary/Pancreas,F,58.0,2.0,21.9,11.5,3.4,145.0,130.0,0.71,3.5,False,True,False
+5337,Breast,F,51.0,1.0,22.9,13.6,4.2,139.0,105.0,0.7,4.2,True,True,True
+5385,Breast,F,51.0,2.0,22.3,10.5,3.8,136.0,95.0,0.73,4.5,True,True,True
+5401,Colorectal,M,63.0,3.0,23.2,11.6,4.3,142.0,134.0,1.19,4.2,True,True,True
+5419,Others,M,59.0,2.0,31.0,14.6,4.0,138.0,246.0,0.62,3.9,False,True,False
+5424,Colorectal,M,60.0,1.0,21.4,13.9,4.9,140.0,87.0,0.84,4.1,False,True,False
+5433,Thyroid,F,45.0,1.0,21.9,15.1,4.2,140.0,96.0,0.66,4.5,True,True,True
+5436,Minor resection,F,56.0,2.0,29.2,14.7,3.8,142.0,101.0,0.68,4.3,True,False,True
+5471,Colorectal,M,64.0,2.0,24.3,14.0,4.4,141.0,139.0,0.89,4.8,False,True,False
+5473,Biliary/Pancreas,F,60.0,2.0,23.7,12.9,5.0,140.0,106.0,0.72,3.5,False,True,False
+5532,Biliary/Pancreas,F,20.0,1.0,34.4,11.6,4.6,141.0,95.0,0.75,4.3,True,True,True
+5533,Colorectal,M,76.0,2.0,27.3,14.4,4.4,142.0,143.0,1.41,4.3,False,True,True
+5559,Colorectal,M,45.0,2.0,22.7,16.5,4.1,139.0,87.0,0.86,4.7,False,True,False
+5562,Minor resection,M,69.0,2.0,26.1,12.6,4.3,143.0,115.0,0.85,3.6,True,False,True
+5576,Colorectal,F,68.0,2.0,18.6,11.2,4.4,138.0,99.0,0.95,4.0,True,True,True
+5577,Biliary/Pancreas,F,37.0,1.0,26.8,13.7,4.0,139.0,100.0,0.77,4.2,False,True,False
+5579,Colorectal,M,68.0,2.0,20.9,14.9,4.3,142.0,97.0,0.92,4.0,True,False,True
+5640,Colorectal,F,61.0,2.0,24.6,11.1,4.3,141.0,122.0,0.71,3.9,False,True,False
+5647,Major resection,F,46.0,1.0,19.7,12.6,4.1,141.0,83.0,0.72,4.6,False,True,False
+5649,Biliary/Pancreas,M,61.0,2.0,18.9,14.0,4.3,141.0,100.0,0.86,4.7,False,True,False
+5689,Thyroid,F,62.0,1.0,28.6,14.2,4.6,142.0,101.0,0.71,4.3,True,True,True
+5705,Biliary/Pancreas,M,42.0,2.0,22.7,9.5,4.4,137.0,199.0,0.71,3.7,False,True,False
+5730,Biliary/Pancreas,M,27.0,1.0,32.1,15.5,4.4,138.0,107.0,1.06,4.4,True,True,True
+5744,Biliary/Pancreas,F,60.0,2.0,23.8,12.8,4.0,141.0,113.0,0.62,4.0,False,True,True
+5752,Colorectal,M,68.0,2.0,27.3,14.3,4.3,141.0,109.0,0.65,4.1,True,True,True
+5758,Biliary/Pancreas,F,45.0,2.0,20.5,13.1,3.8,140.0,100.0,0.67,4.4,False,True,True
+5761,Biliary/Pancreas,M,40.0,1.0,20.9,15.2,4.0,142.0,100.0,0.92,4.7,True,True,True
+5776,Colorectal,M,66.0,2.0,20.7,13.5,4.5,135.0,105.0,0.79,4.2,False,True,False
+5782,Colorectal,M,68.0,3.0,23.1,6.1,4.8,135.0,249.0,0.95,3.6,True,True,True
+5785,Breast,F,21.0,1.0,19.1,12.4,3.8,137.0,91.0,0.75,4.5,False,True,False
+5805,Biliary/Pancreas,F,48.0,1.0,21.3,11.8,4.2,140.0,101.0,0.54,4.3,False,True,True
+5833,Colorectal,M,68.0,2.0,25.2,13.6,4.2,142.0,128.0,1.03,4.4,True,True,True
+5838,Colorectal,F,55.0,2.0,18.4,14.0,3.9,143.0,88.0,0.85,4.5,False,True,False
+5847,Breast,F,19.0,1.0,21.0,11.4,4.0,139.0,105.0,0.56,4.1,True,True,True
+5856,Colorectal,F,77.0,2.0,26.9,13.0,4.2,141.0,97.0,0.64,4.1,True,True,True
+5861,Others,M,63.0,2.0,23.8,16.1,4.4,144.0,124.0,1.59,4.6,True,True,True
+5876,Biliary/Pancreas,F,79.0,2.0,20.4,14.3,4.4,140.0,92.0,0.64,4.3,False,True,False
+5885,Colorectal,F,45.0,1.0,22.5,14.2,3.4,140.0,97.0,0.66,4.4,True,True,True
+5897,Hepatic,F,51.0,1.0,25.6,14.5,4.2,138.0,96.0,0.76,4.5,False,True,False
+5903,Breast,F,52.0,2.0,25.4,10.8,3.8,138.0,100.0,0.62,4.1,True,True,True
+5920,Breast,F,69.0,2.0,23.4,12.5,3.9,144.0,87.0,0.74,4.0,True,True,True
+5959,Minor resection,F,54.0,2.0,22.8,12.5,4.2,144.0,115.0,0.47,3.7,True,True,True
+5960,Colorectal,F,70.0,2.0,29.0,10.4,4.0,141.0,190.0,0.55,3.6,True,True,True
+5978,Minor resection,F,52.0,2.0,22.7,12.1,4.8,139.0,90.0,0.75,4.3,False,True,False
+6025,Breast,F,60.0,1.0,24.4,12.5,4.2,141.0,108.0,0.65,4.2,True,True,True
+6027,Hepatic,M,59.0,2.0,19.7,16.8,4.4,144.0,209.0,0.97,4.7,True,True,True
+6029,Biliary/Pancreas,F,63.0,2.0,25.0,12.6,3.8,143.0,90.0,0.63,3.9,True,True,True
+6030,Breast,F,45.0,1.0,20.9,9.6,4.2,139.0,112.0,0.74,4.1,True,True,True
+6035,Breast,F,54.0,2.0,22.9,11.0,3.7,144.0,95.0,0.61,4.2,True,True,True
+6098,Stomach,M,69.0,2.0,23.8,12.3,4.0,138.0,86.0,0.65,3.7,False,True,True
+6142,Biliary/Pancreas,F,68.0,2.0,27.4,13.1,3.7,144.0,108.0,0.78,4.4,False,True,False
+6150,Colorectal,M,78.0,1.0,19.9,10.5,4.2,135.0,96.0,0.76,3.9,True,False,True
+6158,Biliary/Pancreas,M,42.0,1.0,25.3,15.7,4.2,135.0,100.0,0.88,4.7,False,True,False
+6193,Biliary/Pancreas,M,29.0,1.0,28.1,15.7,4.9,139.0,114.0,0.84,5.1,False,True,False
+6202,Colorectal,M,72.0,2.0,23.9,8.6,3.7,138.0,96.0,0.61,2.6,True,True,True
+6268,Others,M,37.0,2.0,29.6,16.1,4.3,142.0,125.0,1.05,4.3,True,True,True
+6271,Others,M,37.0,3.0,18.3,9.0,3.7,140.0,87.0,0.73,3.4,True,True,True
+6278,Biliary/Pancreas,M,66.0,1.0,23.3,13.3,4.1,140.0,237.0,0.89,4.1,True,True,True
+6303,Biliary/Pancreas,M,62.0,1.0,22.7,15.4,4.1,142.0,93.0,1.11,4.1,False,True,True
+6334,Biliary/Pancreas,F,47.0,1.0,20.4,12.7,4.0,140.0,105.0,0.58,4.1,False,True,False
+6338,Colorectal,M,56.0,2.0,25.2,14.3,4.2,143.0,119.0,0.96,4.7,True,True,True
+6339,Others,M,60.0,3.0,26.4,13.5,4.1,142.0,102.0,1.03,4.2,False,True,True
+6341,Breast,F,44.0,1.0,26.1,11.3,3.9,140.0,88.0,0.62,3.4,True,False,True
+6347,Colorectal,M,56.0,1.0,22.3,15.4,4.4,143.0,91.0,0.82,3.9,False,True,False
+6353,Thyroid,M,40.0,2.0,25.7,15.5,4.8,137.0,91.0,1.11,4.4,True,True,True
+6379,Biliary/Pancreas,M,51.0,1.0,28.0,15.0,4.1,140.0,113.0,1.02,4.7,True,True,True
+6382,Breast,F,38.0,1.0,28.4,13.9,4.2,141.0,105.0,0.55,4.2,True,True,True

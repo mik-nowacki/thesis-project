@@ -12,7 +12,7 @@ from tqdm import tqdm
 import os
 
 import vitaldb
-vitaldb.login("DavidWard1999", "ThisIsMyVitalDB")
+vitaldb.login("login", "password")
 
 OUTPUT_DIR = 'preprocessed/eeg'
 os.makedirs(OUTPUT_DIR, exist_ok=True)
