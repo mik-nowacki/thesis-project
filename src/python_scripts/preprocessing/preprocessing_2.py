@@ -58,6 +58,7 @@ def filter_quality_cases(eeg_cases):
     excluded = {'no_valid_range': 0, 'error': 0, 'late_start': 0, 'BIS_coverage': 0,
                 'BIS_range': 0, 'SQI_mean': 0, 'SQI_worst_10': 0, 'EMG_mean': 0,
                 'art_coverage': 0, 'hr_coverage': 0, 'spo2_coverage': 0, 'etco2_coverage': 0}
+    
     tresholds = {
         'start': 5*60,
         'bis_cov': 0.95,
