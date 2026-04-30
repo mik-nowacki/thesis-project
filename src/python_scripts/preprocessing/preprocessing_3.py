@@ -14,7 +14,7 @@ import os
 import vitaldb
 vitaldb.login("login", "password")
 
-OUTPUT_DIR = 'preprocessed/eeg'
+OUTPUT_DIR = 'eeg'
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 SAMPLING_RATE = 128

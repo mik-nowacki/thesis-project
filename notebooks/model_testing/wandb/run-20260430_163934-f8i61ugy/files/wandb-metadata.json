@@ -1,0 +1,28 @@
+{
+  "os":  "Windows-10-10.0.26200-SP0",
+  "python":  "CPython 3.11.14",
+  "startedAt":  "2026-04-30T14:39:34.708315Z",
+  "program":  "c:\\Users\\mikol\\Coding\\AppliedDataScience\\thesis-project\\notebooks\\model_testing\\lstm_tests.ipynb",
+  "codePath":  "c:\\Users\\mikol\\Coding\\AppliedDataScience\\thesis-project\\notebooks\\model_testing\\lstm_tests.ipynb",
+  "codePathLocal":  "lstm_tests.ipynb",
+  "git":  {
+    "remote":  "git@github.com:mik-nowacki/thesis-project.git",
+    "commit":  "404a889d8f3eb39d4f5e0bded930d5333c0b0972"
+  },
+  "email":  "mikolajnowacki01@gmail.com",
+  "root":  "c:\\Users\\mikol\\Coding\\AppliedDataScience\\thesis-project\\notebooks\\model_testing",
+  "host":  "Vivobook",
+  "executable":  "c:\\Users\\mikol\\anaconda3\\envs\\master_thesis\\python.exe",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "1022334668800",
+      "used":  "416164888576"
+    }
+  },
+  "memory":  {
+    "total":  "33565863936"
+  },
+  "writerId":  "7g5xvixcw1tcugw9lc3gg43ihptpve8i"
+}
