@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 from math import sqrt
-from masking.TriangularCausalMask import TriangularCausalMask
+from .masking import TriangularCausalMask
 
 
 class FullAttention(nn.Module):

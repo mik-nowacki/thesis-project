@@ -14,3 +14,12 @@ models/saved_weights/
 
 # Ignore temporary download logs
 wget-log
+
+.env
+
+# Slurm outputs
+*.out
+*.err
+
+# Weights&Biases
+wandb/
