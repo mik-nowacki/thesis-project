@@ -1,7 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=eeg-iTrans     
 #SBATCH --output=iTrans-%j.out      
-#SBATCH --error=iTrans-%j.err       
+#SBATCH --error=iTrans-%j.err   
+#SBATCH -p long
+#SBATCH -t 02:00:00    
 #SBATCH --gres=gpu:L4:1           
 #SBATCH --cpus-per-task=4         
 #SBATCH --mem=16G                 
@@ -24,5 +26,5 @@ else
 fi
 # 4. Run the script
 echo "Starting iTransformer on GPU..."
-python src/python_scripts/train_itransformer.py
+python src/python_scripts/training/train_itransformer.py
 echo "Job finished."

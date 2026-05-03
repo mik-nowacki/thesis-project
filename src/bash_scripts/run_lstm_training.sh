@@ -24,5 +24,5 @@ fi
 
 # 3. Run the script
 echo "Starting training job on GPU..."
-python src/python_scripts/train_lstm.py
+python src/python_scripts/training/train_lstm.py
 echo "Job finished."

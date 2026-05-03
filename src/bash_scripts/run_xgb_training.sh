@@ -24,5 +24,5 @@ fi
 
 # Run it
 echo "Starting XGBoost on GPU..."
-python src/python_scripts/train_xgb.py
+python src/python_scripts/training/train_xgb.py
 echo "Job finished."

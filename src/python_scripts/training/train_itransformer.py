@@ -11,7 +11,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
-# Import the fixed iTransformer Model
 from models.iTransformer.iTransformer import Model
 
 # =====================================================================
@@ -19,18 +18,18 @@ from models.iTransformer.iTransformer import Model
 # =====================================================================
 @dataclass
 class Configs:
-    seq_len: int = 96          # 96-second window 
+    seq_len: int = 60          # window (in seconds)
     pred_len: int = 1          # Predicting 1 step ahead (the target BIS)
     output_attention: bool = False
     use_norm: bool = True      # Non-stationary normalization (great for EEG)
-    d_model: int = 512         # Dimension of the transformer embeddings
+    d_model: int = 128         # Dimension of the transformer embeddings
     embed: str = 'fixed'
     freq: str = 'h'
     dropout: float = 0.1
     class_strategy: str = 'projection'
     factor: int = 1            # Attention factor
     n_heads: int = 8           # Multi-head attention
-    d_ff: int = 512            # Feed-forward network dimension
+    d_ff: int = 256            # Feed-forward network dimension
     activation: str = 'gelu'
     e_layers: int = 4          # Number of Encoder layers
 

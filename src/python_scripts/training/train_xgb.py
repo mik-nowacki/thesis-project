@@ -8,7 +8,7 @@ import wandb
 from wandb.integration.xgboost import WandbCallback
 
 # Import your custom functions from the new dataset module
-from dataset_xgb import load_pt_samples, extract_xgboost_features
+from python_scripts.datasets.dataset_xgb import load_pt_samples, extract_xgboost_features
 
 def main():
     # Configuration
