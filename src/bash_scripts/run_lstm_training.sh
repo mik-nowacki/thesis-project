@@ -9,14 +9,14 @@
 source ~/miniforge3/bin/activate
 conda activate thesis_project
 
-cd /data/users/nowacki/thesis-project/
+cd /data/users/$USER/thesis-project/
 
 export PYTHONPATH="$(pwd):$PYTHONPATH"
 
 # Load Secrets securely from the .env file
 # This reads the file and exports the variables into the bash environment
-if [ -f /data/users/nowacki/thesis-project/.env ]; then
-    export $(grep -v '^#' /data/users/nowacki/thesis-project/.env | xargs)
+if [ -f /data/users/$USER/thesis-project/.env ]; then
+    export $(grep -v '^#' /data/users/$USER/thesis-project/.env | xargs)
 else
     echo "Warning: .env file not found!"
 fi
