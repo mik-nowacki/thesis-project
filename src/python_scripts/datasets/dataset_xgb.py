@@ -48,8 +48,8 @@ def extract_xgboost_features(X_3d):
     x_std  = np.nanstd(X_3d, axis=1)
     x_max  = np.nanmax(X_3d, axis=1)
     x_min  = np.nanmin(X_3d, axis=1)
-    
+
     # Stack horizontally to create the final 2D feature matrix
     X_2d = np.hstack([x_mean, x_std, x_max, x_min])
-    
+
     return X_2d

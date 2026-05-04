@@ -18,18 +18,18 @@ from models.iTransformer.iTransformer import Model
 # =====================================================================
 @dataclass
 class Configs:
-    seq_len: int = 60          # window (in seconds)
+    seq_len: int = 120          # window (in seconds)
     pred_len: int = 1          # Predicting 1 step ahead (the target BIS)
     output_attention: bool = False
     use_norm: bool = True      # Non-stationary normalization (great for EEG)
-    d_model: int = 128         # Dimension of the transformer embeddings
+    d_model: int = 512         # Dimension of the transformer embeddings
     embed: str = 'fixed'
     freq: str = 'h'
     dropout: float = 0.1
     class_strategy: str = 'projection'
     factor: int = 1            # Attention factor
     n_heads: int = 8           # Multi-head attention
-    d_ff: int = 256            # Feed-forward network dimension
+    d_ff: int = 512            # Feed-forward network dimension
     activation: str = 'gelu'
     e_layers: int = 4          # Number of Encoder layers
 
@@ -123,23 +123,25 @@ def main():
     test_dataset = EEGWindowDataset(INPUT_DIR, test_ids, seq_len=configs.seq_len, scaler=scaler, is_training=False)
 
     BATCH_SIZE = 16
-    train_loader = DataLoader(train_dataset, shuffle=True, batch_size=BATCH_SIZE, num_workers=4)
-    test_loader  = DataLoader(test_dataset, shuffle=False, batch_size=BATCH_SIZE, num_workers=4)
+    train_loader = DataLoader(train_dataset, shuffle=True, batch_size=BATCH_SIZE, num_workers=4, pin_memory=True)
+    test_loader  = DataLoader(test_dataset, shuffle=False, batch_size=BATCH_SIZE, num_workers=4, pin_memory=True)
 
     # D. Initialize iTransformer Model
     model = Model(configs).to(device)
     
     num_features = train_dataset.num_features
-    target_projection = nn.Linear(num_features, 1).to(device)
+    target_projection = nn.Linear(num_features, 1).to(device) # apply regression layers instead?
 
     criterion = nn.MSELoss()
     optimizer = optim.Adam(list(model.parameters()) + list(target_projection.parameters()), lr=0.001)
 
     # E. Initialize Weights & Biases
+    run_name = f"iTrans_seq{configs.seq_len}_dm{configs.d_model}_elay{configs.e_layers}_bsize{BATCH_SIZE}"
     wandb.init(
         project="eeg-bis-prediction", 
         config=configs.__dict__, 
-        name="iTransformer-baseline"
+        name=run_name,
+        group="iTransformer-Config-Search"
     )
 
     # F. Training Loop

@@ -9,7 +9,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
-from tqdm import tqdm
 import wandb
 
 
@@ -86,43 +85,41 @@ class EEGWindowDataset(Dataset):
         
         # Return X and Y (unsqueeze Y to make it shape [1] instead of a scalar)
         return X_window, Y_target.unsqueeze(0)
-    
-
 
 
 # =====================================================================
 # 1. DATA LOADING FUNCTION (Unchanged)
 # =====================================================================
-def load_pt_samples(input_dir, case_ids, seq_len):
-    """Loads 3D sliding windows directly from .pt files for specific patients."""
-    X_list = []
-    Y_list = []
+# def load_pt_samples(input_dir, case_ids, seq_len):
+#     """Loads 3D sliding windows directly from .pt files for specific patients."""
+#     X_list = []
+#     Y_list = []
 
-    for cid in case_ids:
-        sample_path = os.path.join(input_dir, f'case_{cid}.pt')
-        if not os.path.exists(sample_path):
-            continue
+#     for cid in case_ids:
+#         sample_path = os.path.join(input_dir, f'case_{cid}.pt')
+#         if not os.path.exists(sample_path):
+#             continue
             
-        data = torch.load(sample_path, weights_only=False)
-        x = data['features'].numpy()
-        y = data['bis'].numpy()
+#         data = torch.load(sample_path, weights_only=False)
+#         x = data['features'].numpy()
+#         y = data['bis'].numpy()
             
-        num_samples = x.shape[0]
-        if num_samples <= seq_len:
-            continue
+#         num_samples = x.shape[0]
+#         if num_samples <= seq_len:
+#             continue
             
-        # Create sliding windows per patient
-        X_case = np.array([x[i:i+seq_len] for i in range(num_samples - seq_len)])
-        Y_case = np.array([y[i+seq_len] for i in range(num_samples - seq_len)]).reshape(-1, 1)
+#         # Create sliding windows per patient
+#         X_case = np.array([x[i:i+seq_len] for i in range(num_samples - seq_len)])
+#         Y_case = np.array([y[i+seq_len] for i in range(num_samples - seq_len)]).reshape(-1, 1)
         
-        X_list.append(X_case)
-        Y_list.append(Y_case)
+#         X_list.append(X_case)
+#         Y_list.append(Y_case)
 
-    # Combine all patients
-    X = np.concatenate(X_list, axis=0)
-    Y = np.concatenate(Y_list, axis=0)
+#     # Combine all patients
+#     X = np.concatenate(X_list, axis=0)
+#     Y = np.concatenate(Y_list, axis=0)
     
-    return X, Y
+#     return X, Y
 
 # =====================================================================
 # 2. LSTM MODEL DEFINITION
@@ -222,9 +219,7 @@ for epoch in range(params['epochs']):
     model.train()
     train_loss = 0.0
     
-    progress_bar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{params['epochs']}")
-
-    for batch_X, batch_Y in progress_bar:
+    for batch_X, batch_Y in train_loader:
         batch_X, batch_Y = batch_X.to(device), batch_Y.to(device)
         
         optimizer.zero_grad()
@@ -238,8 +233,6 @@ for epoch in range(params['epochs']):
         optimizer.step()
         
         train_loss += loss.item() * batch_X.size(0)
-
-        progress_bar.set_postfix({'loss': f"{loss.item():.4f}"})
         
     train_loss = train_loss / len(train_loader.dataset)
     

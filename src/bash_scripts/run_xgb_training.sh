@@ -1,7 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=eeg-xgb     
 #SBATCH --output=xgb-%j.out      
-#SBATCH --error=xgb-%j.err       
+#SBATCH --error=xgb-%j.err   
+#SBATCH -p long
 #SBATCH --gres=gpu:L4:1           
 #SBATCH --cpus-per-task=4         
 #SBATCH --mem=32G                 

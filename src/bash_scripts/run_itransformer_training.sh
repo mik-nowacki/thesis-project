@@ -3,7 +3,6 @@
 #SBATCH --output=iTrans-%j.out      
 #SBATCH --error=iTrans-%j.err   
 #SBATCH -p long
-#SBATCH -t 02:00:00    
 #SBATCH --gres=gpu:L4:1           
 #SBATCH --cpus-per-task=4         
 #SBATCH --mem=16G                 
