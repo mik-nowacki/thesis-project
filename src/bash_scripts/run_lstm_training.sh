@@ -2,9 +2,10 @@
 #SBATCH --job-name=eeg-lstm       # Job name
 #SBATCH --output=lstm-%j.out      # Standard output log (%j = Job ID)
 #SBATCH --error=lstm-%j.err       # Standard error log
-#SBATCH --gres=gpu:L4:1           # Request 1 NVIDIA L4 GPU[cite: 1, 2]
-#SBATCH --cpus-per-task=4         # Request 4 CPU cores for the PyTorch DataLoader[cite: 1]
-#SBATCH --mem=16G                 # Request 16GB of RAM[cite: 1]
+#SBATCH -p long
+#SBATCH --gres=gpu:L4:1           # Request 1 NVIDIA L4 GPU
+#SBATCH --cpus-per-task=4         # Request 4 CPU cores for the PyTorch DataLoader
+#SBATCH --mem=16G                 # Request 16GB of RAM
 
 source ~/miniforge3/bin/activate
 conda activate thesis_project

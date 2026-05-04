@@ -32,7 +32,7 @@ def objective(trial, dtrain, dtest, Y_test_clean):
     # Initialize W&B
     run = wandb.init(
         project='eeg-bis-prediction',
-        group='optuna-tuning-2',
+        group='optuna-tuning-xgb-2',
         name=f'trial_{trial.number}',
         config=params,
         reinit=True # Allows multiple runs in the same script
