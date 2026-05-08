@@ -10,8 +10,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
-from src.python_scripts.datasets.eeg_window_dataset import EEGWindowDataset
-
 import wandb
 import optuna
 
