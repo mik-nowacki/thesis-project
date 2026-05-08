@@ -35,21 +35,3 @@ def load_pt_samples(input_dir, case_ids, seq_len):
     Y = np.concatenate(Y_list, axis=0)
     
     return X, Y
-
-def extract_xgboost_features(X_3d):
-    """
-    Converts (Samples, Seq_Len, Features) to (Samples, Features * 4)
-    by calculating Mean, Std, Max, and Min across the time window.
-    """
-    print(f"Extracting stats from 3D array of shape: {X_3d.shape}...")
-    
-    # Calculate statistics across the time dimension (axis=1)
-    x_mean = np.nanmean(X_3d, axis=1)
-    x_std  = np.nanstd(X_3d, axis=1)
-    x_max  = np.nanmax(X_3d, axis=1)
-    x_min  = np.nanmin(X_3d, axis=1)
-
-    # Stack horizontally to create the final 2D feature matrix
-    X_2d = np.hstack([x_mean, x_std, x_max, x_min])
-
-    return X_2d

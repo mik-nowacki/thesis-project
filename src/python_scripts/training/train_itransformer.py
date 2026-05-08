@@ -110,7 +110,7 @@ def main():
     # A. Load Patient IDs and Split
     cases_master = pd.read_csv(CASES_FILE)
     all_ids = cases_master['caseid'].tolist()
-    train_ids, test_ids = train_test_split(all_ids, test_size=0.2, random_state=42)
+    train_ids, test_ids = train_test_split(all_ids, test_size=0.2, random_state=2026)
 
     # B. Initialize Configs (Do this early so we can pass seq_len to the dataset)
     configs = Configs()

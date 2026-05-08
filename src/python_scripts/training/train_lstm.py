@@ -167,7 +167,7 @@ def main():
     # Load Patient IDs and Split
     cases_master = pd.read_csv(CASES_FILE)
     all_ids = cases_master['caseid'].tolist()
-    train_ids, test_ids = train_test_split(all_ids, test_size=0.2, random_state=42)
+    train_ids, test_ids = train_test_split(all_ids, test_size=0.2, random_state=2026)
 
     # Initialize Scaler and PyTorch Datasets
     scaler = StandardScaler()
