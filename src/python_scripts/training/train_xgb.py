@@ -83,14 +83,15 @@ def objective(trial, ds_train, ds_val, ds_test, Y_test_clean, seq_len):
 
 
     # Log final metrics for this trial
-    wandb.log({"test_mae": mae, 
-               "test_mse": mse, 
-               "test_rmse": rmse,
-               "test_r2_score": r2,
-               "test_tolerance_accuracy_2_5": tolerance_accuracy_25,
-               "test_tolerance_accuracy_5": tolerance_accuracy_5,
-               "test_tolerance_accuracy_10": tolerance_accuracy_10,
-               })
+    wandb.log({
+                "test_mae": mae, 
+                "test_mse": mse, 
+                "test_rmse": rmse,
+                "test_r2_score": r2,
+                "test_tolerance_accuracy_2_5": tolerance_accuracy_25,
+                "test_tolerance_accuracy_5": tolerance_accuracy_5,
+                "test_tolerance_accuracy_10": tolerance_accuracy_10,
+            })
     wandb.finish()
 
     # Free memory before next trial
@@ -108,10 +109,10 @@ def main():
     
     # Configuration
     SEQ_LEN = args.seq_len
+    TRAINING_SIZE = 0.7 # split into 70%/15%/15%
+
     INPUT_DIR = 'data/processed/eeg'
     CASES_FILE = 'data/processed/cases_data.csv'
-    SEQ_LEN = 120
-    TRAINING_SIZE = 0.7 # split into 70%/15%/15%
 
     # --- INDEX LOADING ---
     cases_master = pd.read_csv(CASES_FILE)

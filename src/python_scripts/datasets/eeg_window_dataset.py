@@ -12,8 +12,7 @@ class EEGWindowDataset(Dataset):
         self.index_map = []  # Stores tuples of (patient_index, timestep_start)
         
         all_X_for_scaler = []
-        
-        print(f"Loading raw data into memory (Training={is_training})...")
+
         patient_idx = 0
         
         for cid in case_ids:
@@ -23,8 +22,7 @@ class EEGWindowDataset(Dataset):
                 
             data = torch.load(sample_path, weights_only=False)
             
-            # Neural networks output NaN instantly if inputs have NaNs.
-            # replace any missing EEG features with 0.0 safely.
+            # Replace NaN in EEG features with 0.0
             x = np.nan_to_num(data['features'].numpy(), nan=0.0) 
             y = data['bis'].numpy()
             
@@ -46,21 +44,19 @@ class EEGWindowDataset(Dataset):
                     
             patient_idx += 1
 
-        # Fit and Apply Scaler on flat 2D data (super fast and memory efficient)
+        # Fit and Apply Scaler on flat 2D data
         if is_training and scaler is not None:
-            print("Fitting standard scaler...")
             stacked_X = np.vstack(all_X_for_scaler)
             scaler.fit(stacked_X)
             
         if scaler is not None:
-            print("Applying scaler...")
             for i in range(len(self.patient_X)):
                 self.patient_X[i] = scaler.transform(self.patient_X[i])
                 
         # Convert to tensors once to save CPU time during training
         self.patient_X = [torch.tensor(arr, dtype=torch.float32) for arr in self.patient_X]
         self.patient_Y = [torch.tensor(arr, dtype=torch.float32) for arr in self.patient_Y]
-        print(f"Dataset ready. Total valid 60s windows: {len(self.index_map)}")
+        print(f"Dataset ready. Total valid windows: {len(self.index_map)}")
 
     def __len__(self):
         return len(self.index_map)
@@ -69,7 +65,7 @@ class EEGWindowDataset(Dataset):
         # Look up which patient and which timestamp this index corresponds to
         p_idx, start_t = self.index_map[idx]
         
-        # Slice the 60-step window from the raw data ON THE FLY
+        # Slice the window from the raw data
         X_window = self.patient_X[p_idx][start_t : start_t + self.seq_len]
         
         # Grab the target BIS value at the end of the window
