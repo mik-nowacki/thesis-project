@@ -7,6 +7,12 @@
 #SBATCH --cpus-per-task=4         
 #SBATCH --mem=32G                 
 
+# read the cmd argument
+SEQ_LEN=${1:-60}
+
+# clear the cmd input (so that the conda env is loaded correctly)
+set -- 
+
 # Load your Minerva environment
 source ~/miniforge3/bin/activate
 conda activate thesis_project
@@ -24,6 +30,6 @@ else
 fi
 
 # Run it
-echo "Starting XGBoost on GPU..."
-python src/python_scripts/training/train_xgb.py
+echo "Starting XGBoost on GPU for SEQ_LEN: $SEQ_LEN..."
+python src/python_scripts/training/train_xgb.py --seq_len $SEQ_LEN
 echo "Job finished."

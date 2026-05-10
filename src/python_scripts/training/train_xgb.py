@@ -4,6 +4,7 @@ import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error, root_mean_squared_error, r2_score
 
+import argparse
 import gc
 
 import wandb
@@ -22,7 +23,7 @@ def objective(trial, ds_train, ds_val, ds_test, Y_test_clean, seq_len):
         'eval_metric': 'rmse',
         'tree_method': 'hist',  # Required for GPU
         'device': 'cuda',       # Minerva L4 GPU
-        'max_bin': 64,          # Optimize VRAM usage
+        'max_bin': 128,          # Optimize VRAM usage
 
         # --- Optuna Parameter Suggestions ---
         'learning_rate': trial.suggest_float('learning_rate', 1e-3, 0.3, log=True),
@@ -42,7 +43,7 @@ def objective(trial, ds_train, ds_val, ds_test, Y_test_clean, seq_len):
         project='eeg-bis-prediction',
         group=f'xgb-seq-{seq_len}-v1',
         name=f'trial_{trial.number}',
-        config=params,
+        config=run_config,
         reinit=True # Allows multiple runs in the same script
     )
     wandb_callback = WandbCallback()
@@ -100,7 +101,13 @@ def objective(trial, ds_train, ds_val, ds_test, Y_test_clean, seq_len):
     return rmse
 
 def main():
+    # Parse cmd arguments
+    parser = argparse.ArgumentParser(description="Run XGBoost Tuning for a specific Sequence Length")
+    parser.add_argument('--seq_len', type=int, default=60, help="Length of the sliding window (Default: 60)")
+    args = parser.parse_args()
+    
     # Configuration
+    SEQ_LEN = args.seq_len
     INPUT_DIR = 'data/processed/eeg'
     CASES_FILE = 'data/processed/cases_data.csv'
     SEQ_LEN = 120
@@ -153,8 +160,7 @@ def main():
     ds_test  = xgb.DMatrix(X_test_clean,  label=Y_test_clean)
 
     # --- OPTUNA OPTIMIZATION ---
-    print("\nStarting Hyperparameter Tuning...")
-
+    print(f"=== STARTING OPTUNA STUDY FOR SEQ_LEN: {SEQ_LEN} ===")
     study = optuna.create_study(direction="minimize")
 
     study.optimize(
