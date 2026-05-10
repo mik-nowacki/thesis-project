@@ -20,10 +20,10 @@ def objective(trial, ds_train, ds_val, ds_test, Y_test_clean, seq_len):
     # --- HYPERPARAMETER SPACE ---
     params = {
         'objective': 'reg:squarederror',    
-        'eval_metric': 'rmse',
+        'eval_metric': 'rmse',  # metric_name
         'tree_method': 'hist',  # Required for GPU
         'device': 'cuda',       # Minerva L4 GPU
-        'max_bin': 128,          # Optimize VRAM usage
+        'max_bin': 128,         # Optimize VRAM usage
 
         # --- Optuna Parameter Suggestions ---
         'learning_rate': trial.suggest_float('learning_rate', 1e-3, 0.3, log=True),
@@ -41,15 +41,15 @@ def objective(trial, ds_train, ds_val, ds_test, Y_test_clean, seq_len):
 
     run = wandb.init(
         project='eeg-bis-prediction',
-        group=f'xgb-seq-{seq_len}-v1',
+        group=f'xgb-seq-{seq_len}-bin-128',
         name=f'trial_{trial.number}',
         config=run_config,
         reinit=True # Allows multiple runs in the same script
     )
     wandb_callback = WandbCallback()
-    pruning_callback = XGBoostPruningCallback(trial, "val-rmse")
+    pruning_callback = XGBoostPruningCallback(trial, "val-rmse") # "dataset_name-metric_name"
 
-    evals_list = [(ds_train, 'train'), (ds_val, 'val')]
+    evals_list = [(ds_train, 'train'), (ds_val, 'val')] # dataset_name is 'val' here 
 
     # --- TRAINING ---
     xgb_model = xgb.train(
