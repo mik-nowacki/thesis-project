@@ -5,17 +5,22 @@
 #SBATCH -p long
 #SBATCH --gres=gpu:L4:1           
 #SBATCH --cpus-per-task=4         
-#SBATCH --mem=16G                 
+#SBATCH --mem=32G                 
 
-# 1. Load Minerva environment
+# read the cmd argument
+SEQ_LEN=${1:-200}
+
+# clear the cmd input (so that the conda env is loaded correctly)
+set -- 
+
+# Load conda environment
 source ~/miniforge3/bin/activate
 conda activate thesis_project
 
-# 2. Set the Python path to the root of the project
+# Set paths
 cd /data/users/$USER/thesis-project/
 export PYTHONPATH="$(pwd):$PYTHONPATH"
 
-# 3. Authenticate Weights & Biases headless
 # Load Secrets securely from the .env file
 # This reads the file and exports the variables into the bash environment
 if [ -f /data/users/$USER/thesis-project/.env ]; then
@@ -23,7 +28,7 @@ if [ -f /data/users/$USER/thesis-project/.env ]; then
 else
     echo "Warning: .env file not found!"
 fi
-# 4. Run the script
-echo "Starting iTransformer on GPU..."
-python src/python_scripts/training/train_itransformer.py
+# Run the script
+echo "Starting iTransformer on GPU for SEQ_LEN: $SEQ_LEN..."
+python src/python_scripts/training/train_itransformer.py --seq_len $SEQ_LEN
 echo "Job finished."
