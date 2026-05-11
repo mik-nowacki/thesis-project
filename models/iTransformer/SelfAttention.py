@@ -6,13 +6,13 @@ from .masking import TriangularCausalMask
 
 
 class FullAttention(nn.Module):
-    def __init__(self, mask_flag=True, scale=None, attention_dropout=0.1, output_attention=False):
+    def __init__(self, mask_flag=True, scale=None, attention_dropout=0.1):
         super(FullAttention, self).__init__()
         self.scale = scale
         self.mask_flag = mask_flag
         self.dropout = nn.Dropout(attention_dropout)
 
-    def forward(self, queries, keys, values, attn_mask, tau=None, delta=None):
+    def forward(self, queries, keys, values, attn_mask):
         B, L, H, E = queries.shape
         _, S, _, D = values.shape
         scale = self.scale or 1. / sqrt(E)
@@ -28,10 +28,7 @@ class FullAttention(nn.Module):
         A = self.dropout(torch.softmax(scale * scores, dim=-1))
         V = torch.einsum("bhls,bshd->blhd", A, values)
 
-        if self.output_attention:
-            return (V.contiguous(), A)
-        else:
-            return (V.contiguous(), None)
+        return (V.contiguous(), None)
 
 
 class AttentionLayer(nn.Module):
@@ -48,7 +45,7 @@ class AttentionLayer(nn.Module):
         self.out_projection = nn.Linear(d_values * n_heads, d_model)
         self.n_heads = n_heads
 
-    def forward(self, queries, keys, values, attn_mask, tau=None, delta=None):
+    def forward(self, queries, keys, values, attn_mask):
         B, L, _ = queries.shape
         _, S, _ = keys.shape
         H = self.n_heads
@@ -62,8 +59,6 @@ class AttentionLayer(nn.Module):
             keys,
             values,
             attn_mask,
-            tau=tau,
-            delta=delta
         )
         out = out.view(B, L, -1)
 

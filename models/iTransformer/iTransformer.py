@@ -4,8 +4,6 @@ import torch.nn.functional as F
 from .Transformer_Encoder import Encoder, EncoderLayer
 from .SelfAttention import FullAttention, AttentionLayer
 from .Embed import DataEmbedding_inverted
-import numpy as np
-
 
 class Model(nn.Module):
     """
@@ -15,7 +13,6 @@ class Model(nn.Module):
     def __init__(self, configs):
         super(Model, self).__init__()
         self.pred_len = configs.pred_len
-        self.output_attention = configs.output_attention
         self.use_norm = configs.use_norm
         # Embedding
         self.enc_embedding = DataEmbedding_inverted(configs.seq_len, configs.d_model, configs.dropout)
@@ -69,8 +66,4 @@ class Model(nn.Module):
 
     def forward(self, x_enc, x_mark_enc):
         dec_out, attns = self.forecast(x_enc, x_mark_enc)
-        
-        if self.output_attention:
-            return dec_out[:, -self.pred_len:, :], attns
-        else:
-            return dec_out[:, -self.pred_len:, :]  # [B, L, D]
+        return dec_out[:, -self.pred_len:, :]  # [B, L, D]

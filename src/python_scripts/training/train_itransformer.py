@@ -23,7 +23,6 @@ class iTransformerConfig:
     """Configuration parameters for the iTransofmer constructor"""
     seq_len: int 
     pred_len: int 
-    output_attention: bool
     use_norm: bool
     mask: bool
     activation: str
@@ -40,7 +39,6 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
         # iTransformer
         'seq_len': seq_len, 
         'pred_len': 1, 
-        'output_attention': False,
         'use_norm': True,
         'mask': True,
         'activation': trial.suggest_categorical('activation', ['relu', 'gelu']),
@@ -73,7 +71,8 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
     test_loader  = DataLoader(test_dataset, shuffle=False, batch_size=params["batch_size"], num_workers=4, pin_memory=True)
 
     # Initialize iTransformer Model
-    configs = iTransformerConfig(**params)
+    model_params = {k: v for k, v in params.items() if k not in ['learning_rate', 'batch_size', 'epochs']}
+    configs = iTransformerConfig(**model_params)
     model = Model(configs).to(device)
     
     num_features = train_dataset.num_features

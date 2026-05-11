@@ -56,7 +56,10 @@ class EEGWindowDataset(Dataset):
         # Convert to tensors once to save CPU time during training
         self.patient_X = [torch.tensor(arr, dtype=torch.float32) for arr in self.patient_X]
         self.patient_Y = [torch.tensor(arr, dtype=torch.float32) for arr in self.patient_Y]
+        self.num_features = self.patient_X[0].shape[-1] if len(self.patient_X) > 0 else 0
+
         print(f"Dataset ready. Total valid windows: {len(self.index_map)}")
+
 
     def __len__(self):
         return len(self.index_map)
