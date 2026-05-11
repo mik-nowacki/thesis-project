@@ -13,7 +13,7 @@ SEQ_LEN=${1:-60}
 # clear the cmd input (so that the conda env is loaded correctly)
 set -- 
 
-# Load your Minerva environment
+# Load conda environment
 source ~/miniforge3/bin/activate
 conda activate thesis_project
 

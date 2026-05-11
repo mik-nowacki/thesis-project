@@ -14,7 +14,7 @@ import gc
 import wandb
 import optuna
 
-from models.LSTM.lstm.Model import Model
+from models.LSTM.lstm import Model
 from src.python_scripts.datasets.eeg_window_dataset import EEGWindowDataset
 
 
@@ -71,7 +71,7 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
     best_val_rmse = float('inf')
 
     try:
-        # Training
+        # --- Training ---
         for epoch in range(params['epochs']):
             model.train()
             train_sse = 0.0
@@ -90,7 +90,7 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
             train_mse = train_sse / len(train_loader.dataset)
             train_rmse = np.sqrt(train_mse)
 
-            # Validation
+            # --- Validation ---
             model.eval()
             val_sse = 0.0
             with torch.no_grad():
@@ -99,7 +99,6 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
                     
                     preds = model(batch_X)
                     loss = criterion(preds, batch_Y)
-
                     val_sse += loss.item() * batch_X.size(0)
             
             val_mse = val_sse / len(val_loader.dataset)
@@ -123,7 +122,7 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
                 early_stopping_counter += 1
             
             # Report the intermediate metric to Optuna
-            trial.report(best_val_rmse, epoch)
+            trial.report(val_rmse, epoch)
             # Check if Optuna thinks this trial is unpromising
             if trial.should_prune():
                 print(f"Trial {trial.number} pruned at epoch {epoch}.")
@@ -140,7 +139,8 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
 
         with torch.no_grad():
             for batch_X, batch_Y in test_loader:
-                batch_X, batch_Y = batch_X.to(device), batch_Y.to(device)
+                # batch_X, batch_Y = batch_X.to(device), batch_Y.to(device)
+                batch_X = batch_X.to(device)
 
                 preds = model(batch_X)
                 # loss = criterion(preds, batch_Y)
@@ -213,11 +213,10 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
 
 
 
-# --- Main execution pipeline
 def main():
     # Parse cmd arguments
     parser = argparse.ArgumentParser(description="Run LSTM Tuning for a specific Sequence Length")
-    parser.add_argument('--seq_len', type=int, default=60, help="Length of the sliding window (Default: 60)")
+    parser.add_argument('--seq_len', type=int, default=200, help="Length of the sliding window (Default: 200)")
     args = parser.parse_args()
 
     # Configuration
