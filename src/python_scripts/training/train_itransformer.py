@@ -136,7 +136,7 @@ def objective(trial, train_dataset, val_dataset, seq_len, device):
             })
 
             # Optuna early stopping / saving best model
-            if best_val_rmse - val_rmse > 0.005: # check if the model still is improving
+            if val_rmse < best_val_rmse: # check if the model still is improving
                 best_val_rmse = val_rmse
                 early_stopping_counter = 0
                 trial.set_user_attr('best_epoch', epoch)

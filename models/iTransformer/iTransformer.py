@@ -72,4 +72,4 @@ class Model(nn.Module):
         dec_out, attns = self.forecast(x_enc, x_mark_enc)
         out = dec_out[:, -self.pred_len:, :]  # [B, L, D]
         out = self.regression_head(out)       # [B, 1, 1]
-        return out.squeeze(-1)                # [B,1]
+        return out.squeeze(-1).squeeze(-1)    # [B]

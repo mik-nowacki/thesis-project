@@ -28,4 +28,4 @@ class Model(nn.Module):
         
         # Pass through the linear layer to get the final BIS prediction
         out = self.fc(out)
-        return out
+        return out.squeeze(-1) # [B, 1] -> [B]

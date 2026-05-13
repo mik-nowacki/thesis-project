@@ -74,6 +74,6 @@ class EEGWindowDataset(Dataset):
         # Grab the target BIS value at the end of the window
         Y_target = self.patient_Y[p_idx][start_t + self.seq_len]
         
-        # Return X and Y (unsqueeze Y to make it shape [1] instead of a scalar)
-        return X_window, Y_target.unsqueeze(0)
+        # Return X and Y
+        return X_window, Y_target
 
