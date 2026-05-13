@@ -12,6 +12,7 @@ class Model(nn.Module):
 
     def __init__(self, configs):
         super(Model, self).__init__()
+        self.num_features = configs.num_features
         self.pred_len = configs.pred_len
         self.use_norm = configs.use_norm
         # Embedding
@@ -31,6 +32,9 @@ class Model(nn.Module):
             norm_layer=torch.nn.LayerNorm(configs.d_model)
         )
         self.projector = nn.Linear(configs.d_model, configs.pred_len, bias=True)
+
+        # Regression head
+        self.regression_head = nn.Linear(configs.num_features, 1)
 
     def forecast(self, x_enc, x_mark_enc):
         if self.use_norm:
@@ -66,4 +70,6 @@ class Model(nn.Module):
 
     def forward(self, x_enc, x_mark_enc):
         dec_out, attns = self.forecast(x_enc, x_mark_enc)
-        return dec_out[:, -self.pred_len:, :]  # [B, L, D]
+        out = dec_out[:, -self.pred_len:, :]  # [B, L, D]
+        out = self.regression_head(out)       # [B, 1, 1]
+        return out.squeeze(-1)                # [B,1]

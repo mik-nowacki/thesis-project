@@ -8,7 +8,9 @@ from sklearn.preprocessing import StandardScaler, RobustScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, mean_absolute_error, root_mean_squared_error, r2_score
 
+import json
 import argparse
+import os
 import gc
 
 import wandb
@@ -19,12 +21,12 @@ from src.python_scripts.datasets.eeg_window_dataset import EEGWindowDataset
 
 
 # --- Optuna ---
-def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
+def objective(trial, train_dataset, val_dataset, seq_len, device):
     # --- HYPERPARAMETER SPACE ---
     params = {
         # LSTM
         'input_size': train_dataset.patient_X[0].shape[-1],
-        'hidden_size': trial.suggest_categorical('hidden_size', [16, 32, 64]),
+        'hidden_size': trial.suggest_categorical('hidden_size', [16, 32, 64, 128, 256]),
         'num_layers': trial.suggest_int('num_layers', 1, 3),
         'dropout': trial.suggest_float('dropout', 0.0, 0.5),
         'bidirectional': trial.suggest_categorical('bidirectional', [True, False]),
@@ -42,19 +44,22 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
     run_config = params.copy()
     run_config['seq_len'] = seq_len
 
+    # directory to save best model
+    save_dir = f'checkpoints/lstm/seq{seq_len}'
+    os.makedirs(save_dir, exist_ok=True)
+
     # Initialize W&B
     run = wandb.init(
         project="eeg-bis-prediction",
-        group=f"lstm-seq-{seq_len}-v1",
+        group=f"lstm-seq-{seq_len}-v2",
         name=f"trial_{trial.number}",
         config=run_config,
         reinit=True
     )
 
     # Create DataLoaders dynamically for this trial's batch_size
-    train_loader = DataLoader(train_dataset, shuffle=True, batch_size=params['batch_size'], num_workers=4)
-    val_loader = DataLoader(val_dataset, shuffle=False, batch_size=params['batch_size'], num_workers=4)
-    test_loader  = DataLoader(test_dataset, shuffle=False, batch_size=params['batch_size'], num_workers=4)
+    train_loader = DataLoader(train_dataset, shuffle=True, batch_size=params['batch_size'], num_workers=4, pin_memory=True)
+    val_loader = DataLoader(val_dataset, shuffle=False, batch_size=params['batch_size'], num_workers=4, pin_memory=True)
 
     # Initialize Model, Loss, Optimizer
     model = Model(
@@ -71,8 +76,8 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
     best_val_rmse = float('inf')
 
     try:
-        # --- Training ---
         for epoch in range(params['epochs']):
+            # --- Training ---
             model.train()
             train_sse = 0.0
 
@@ -109,15 +114,16 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
                 "train_rmse": train_rmse,
                 "val_mse": val_mse, 
                 "val_rmse": val_rmse,
-                "epoch": epoch+1
+                "epoch": epoch
             })
 
-            
-            # --- OPTUNA EARLY STOPPING ---
+            # Optuna early stopping / saving best model
             if best_val_rmse - val_rmse > 0.005: # check if the model still is improving
                 best_val_rmse = val_rmse
                 early_stopping_counter = 0
-                # torch.save(model.state_dict(), best_model_path) # save the weights?
+                trial.set_user_attr('best_epoch', epoch)
+                best_model_path = f'{save_dir}/trial_{trial.number}_best.pt'
+                torch.save(model.state_dict(), best_model_path)
             else:
                 early_stopping_counter += 1
             
@@ -131,65 +137,6 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
             if early_stopping_counter >= early_stopping_rounds:
                 print(f"Early stopping triggered at epoch {epoch}")
                 break # Exit the epoch loop
-
-        # Testing
-        model.eval()
-        all_preds = []
-        all_trues = []
-
-        with torch.no_grad():
-            for batch_X, batch_Y in test_loader:
-                # batch_X, batch_Y = batch_X.to(device), batch_Y.to(device)
-                batch_X = batch_X.to(device)
-
-                preds = model(batch_X)
-                # loss = criterion(preds, batch_Y)
-                # test_sse += loss.item() * batch_Y.size(0)
-
-                all_preds.append(preds.cpu().numpy())
-                all_trues.append(batch_Y.cpu().numpy())
-
-        all_preds = np.concatenate(all_preds, axis=0).flatten()
-        all_trues = np.concatenate(all_trues, axis=0).flatten()
-
-        test_mae = mean_absolute_error(all_trues, all_preds)
-        test_mse = mean_squared_error(all_trues, all_preds)
-        test_rmse = root_mean_squared_error(all_trues, all_preds)
-        test_r2 = r2_score(all_trues, all_preds)
-
-        abs_errors = np.abs(all_trues - all_preds)
-
-        within_2_5 = abs_errors <= 2.5
-        tolerance_accuracy_2_5 = np.mean(within_2_5) * 100
-
-        within_5 = abs_errors <= 5.0
-        tolerance_accuracy_5 = np.mean(within_5) * 100
-
-        within_10 = abs_errors <= 10.0
-        tolerance_accuracy_10 = np.mean(within_10) * 100
-
-        wandb.log({
-                "test_mae": test_mae, 
-                "test_mse": test_mse, 
-                "test_rmse": test_rmse,
-                "test_r2_score": test_r2,
-                "test_tolerance_accuracy_2_5": tolerance_accuracy_2_5,
-                "test_tolerance_accuracy_5": tolerance_accuracy_5,
-                "test_tolerance_accuracy_10": tolerance_accuracy_10,
-            })
-    
-        # --- old testing ---
-        # test_mse = test_sse / len(test_loader.dataset)
-        # test_rmse = np.sqrt(test_mse)
-
-        # # TODO: TOLERANCES
-        # wandb.log({"test_mse": test_mse, 
-        #             "test_rmse": test_rmse,
-        #             "test_r2_score": test_r2,
-        #             # "test_tolerance_accuracy_2_5": tolerance_accuracy_25,
-        #             # "test_tolerance_accuracy_5": tolerance_accuracy_5,
-        #             # "test_tolerance_accuracy_10": tolerance_accuracy_10,
-        #         })
 
         return best_val_rmse
 
@@ -216,14 +163,13 @@ def objective(trial, train_dataset, val_dataset, test_dataset, seq_len, device):
 def main():
     # Parse cmd arguments
     parser = argparse.ArgumentParser(description="Run LSTM Tuning for a specific Sequence Length")
-    parser.add_argument('--seq_len', type=int, default=200, help="Length of the sliding window (Default: 200)")
+    parser.add_argument('--seq_len', type=int, default=100, help="Length of the sliding window (Default: 100)")
     args = parser.parse_args()
 
     # Configuration
-    TRAINING_SIZE = 0.7 # split into 70%/15%/15%
     SEQ_LEN = args.seq_len
     INPUT_DIR = 'data/processed/eeg'
-    CASES_FILE = 'data/processed/cases_data.csv'
+    CASES_FILE = 'data/processed/train_cases.csv'
 
     # Device configuration (use GPU if available)
     device = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')
@@ -232,8 +178,7 @@ def main():
     # Load Patient IDs and Split
     cases_master = pd.read_csv(CASES_FILE)
     all_ids = cases_master['caseid'].tolist()
-    train_ids, val_test_ids = train_test_split(all_ids, test_size=1-TRAINING_SIZE, random_state=2026)
-    val_ids, test_ids = train_test_split(val_test_ids, test_size=0.5, random_state=2026)
+    train_ids, val_ids = train_test_split(all_ids, test_size=0.176, random_state=2026)
 
     # Initialize Scaler and PyTorch Datasets
     # scaler = StandardScaler()
@@ -257,30 +202,44 @@ def main():
         is_training=False
     )
 
-    # The testing dataset will USE the fitted scaler
-    test_dataset = EEGWindowDataset(
-        input_dir=INPUT_DIR, 
-        case_ids=test_ids, 
-        seq_len=SEQ_LEN, 
-        scaler=scaler, 
-        is_training=False
-    )
-
     # --- OPTUNA OPTIMIZATION ---
     print("\nStarting PyTorch LSTM Hyperparameter Tuning...")
-    study = optuna.create_study(direction="minimize")
+    study = optuna.create_study(direction="minimize", 
+                                pruner=optuna.pruners.MedianPruner(n_warmup_steps=5))
     
     # Run the optimization
     study.optimize(
-        lambda trial: objective(trial, train_dataset, val_dataset, test_dataset, SEQ_LEN, device), 
+        lambda trial: objective(trial, train_dataset, val_dataset, SEQ_LEN, device), 
         n_trials=50
     )
 
+    best_trial = study.best_trial
+    save_dir = f'checkpoints/lstm/seq{SEQ_LEN}'
+    os.makedirs(save_dir, exist_ok=True)
+
     print("\n--- OPTIMIZATION FINISHED ---")
-    print(f"Best Val RMSE: {study.best_trial.value:.4f} BIS points")
+    print(f"Number of finished trials: {len(study.trials)}")
+    print(f"Best RMSE: {best_trial.value:.4f}")
     print("Best hyperparameters:")
-    for key, value in study.best_trial.params.items():
+    for key, value in best_trial.params.items():
         print(f"    {key}: {value}")
+
+    # Save study metadata
+    study_results = {
+        'best_trial': best_trial.number,
+        'best_val_rmse': best_trial.value,
+        'best_epoch': best_trial.user_attrs['best_epoch'],
+        'params': best_trial.params,
+        'seq_len': SEQ_LEN,
+    }
+    with open(f'{save_dir}/study_results.json', 'w') as f:
+        json.dump(study_results, f, indent=2)
+
+    # clean up former best trials
+    for trial in study.trials:
+        path = f'{save_dir}/trial_{trial.number}_best.pt'
+        if trial.number != best_trial.number and os.path.exists(path):
+            os.remove(path)
 
 if __name__ == "__main__":
     main()

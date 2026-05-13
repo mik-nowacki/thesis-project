@@ -23,3 +23,6 @@ wget-log
 
 # Weights&Biases
 wandb/
+
+# saved trials and params
+checkpoints/
