@@ -15,7 +15,7 @@ def load_pt_samples(input_dir, case_ids, seq_len):
         data = torch.load(sample_path, weights_only=False)
         x = data['features'].numpy()
         y = data['bis'].numpy()
-            
+
         num_samples = x.shape[0]
         if num_samples <= seq_len:
             continue
