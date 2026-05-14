@@ -35,7 +35,7 @@ def train_xgb(ds_train, ds_val, Y_val, seq_len, save_dir):
     run = wandb.init(
         project='bis-prediction-training',
         group=f'xgb',
-        name=f'xgb_{seq_len}_d_{params['max_depth']}_bin_{params['max_bin']}',
+        name=f'xgb_{seq_len}_d_{params["max_depth"]}_bin_{params["max_bin"]}', 
         config=params,
         reinit=True # Allows multiple runs in the same script
     )
@@ -136,12 +136,11 @@ def main():
     ds_train = xgb.DMatrix(X_train, label=Y_train)
     ds_val = xgb.DMatrix(X_val, label=Y_val)
 
-    train_xgb(ds_train, ds_val, Y_val, SEQ_LEN)
-
-
-    # print(f"=== STARTING OPTUNA STUDY FOR SEQ_LEN: {SEQ_LEN} ===")
     save_dir = f'checkpoints/xgb/seq{SEQ_LEN}'
     os.makedirs(save_dir, exist_ok=True)
+
+    train_xgb(ds_train, ds_val, Y_val, SEQ_LEN, save_dir)
+
 
 
     # print("\n--- OPTIMIZATION FINISHED ---")
