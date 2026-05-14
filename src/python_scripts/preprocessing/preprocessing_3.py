@@ -14,6 +14,9 @@ import os
 import vitaldb
 vitaldb.login("login", "password")
 
+NAN_THRESHOLD = 30 #More than 30 seconds of NaN values are rejected in BIS
+MIN_DATA_LEN = 20*60 #At least 20 minutes of valid, high quality data
+
 OUTPUT_DIR = 'eeg'
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -39,7 +42,7 @@ EDGES = {
 
 def preprocess_case(caseid, start, end):
 
-    eeg, vitals, bis = load_crop_eeg(caseid, start, end)
+    eeg, vitals, bis, start, end = load_crop_eeg(caseid, start, end)
 
     # Interpolate NaNs before filtering
     eeg = interpolate_nans(eeg)
@@ -85,13 +88,6 @@ def load_crop_eeg(caseid, start, end):
     vital_cols = [art_col, 4, 5, 6]
     vitals = data[:, vital_cols]
 
-    #Define cropping indices with padding
-    l_crop = (start - PADDING)*SAMPLING_RATE
-    r_crop = (end + PADDING)*SAMPLING_RATE
-
-    #Crop the EEG signal
-    eeg_cropped = eeg[l_crop:r_crop]
-
     #Crop BIS signal and resample to 1Hz by taking the first valid value in each second
     bis_cropped = np.zeros(end - start)
     
@@ -99,6 +95,23 @@ def load_crop_eeg(caseid, start, end):
         block = bis[(s + start) * SAMPLING_RATE : (s + start + 1) * SAMPLING_RATE]
         valid = block[~np.isnan(block)]
         bis_cropped[s] = valid[0] if len(valid) > 0 else np.nan
+
+    #Interpolate BIS values if there are a maximum of 30 seconds of missing data
+    #Otherwise check if there is enough valid data from the start until the next gap to keep the case. 
+    bis_cropped, new_crop = get_clean_bis(bis_cropped, start, end)
+
+    if bis_cropped is None:
+        raise ValueError("BIS signal has too many NaNs and cannot be cleaned")
+
+    if new_crop is not None:
+        start, end = new_crop
+
+    #Define cropping indices with padding
+    l_crop = (start - PADDING)*SAMPLING_RATE
+    r_crop = (end + PADDING)*SAMPLING_RATE
+
+    #Crop the EEG signal
+    eeg_cropped = eeg[l_crop:r_crop]
 
     #Crop vitals and resample to 1Hz by taking a valid value in the next second or interpolating otherwise
     vitals_cropped = np.zeros((end - start, 4))
@@ -114,7 +127,65 @@ def load_crop_eeg(caseid, start, end):
     for v in range(4):
         vitals_cropped[:, v] = interpolate_nans(vitals_cropped[:, v], max_gap=3)    
 
-    return eeg_cropped, vitals_cropped, bis_cropped
+    return eeg_cropped, vitals_cropped, bis_cropped, start, end
+
+
+def get_clean_bis(bis, start, end):
+    bis[bis <= 10] = np.nan
+
+    bis_nans = np.isnan(bis)
+    n_nans = bis_nans.sum()
+    
+    # Case 1: Less than nan_sec_threshold seconds of NaNs - interpolate and keep full length
+    if n_nans < NAN_THRESHOLD:
+        return interpolate_nans(bis), None
+    
+    else:
+        #Detect the NAN runs and their lengths
+        diff = np.diff(np.concatenate(([0], bis_nans.view(np.int8), [0])))
+
+        #Detect start and end
+        starts = np.where(diff == 1)[0]
+        ends = np.where(diff == -1)[0]
+
+        lengths = ends - starts
+
+        #Detect long consecutive runs of NaN values 
+        long_runs_mask = (lengths >= NAN_THRESHOLD)
+
+        # Case 2: If no consecutive run of NAN_THRESHOLD then interpolate and keep full length
+        if long_runs_mask.sum() == 0:
+            return interpolate_nans(bis), None
+        
+        # Case 3: If there are more than one long run of NaN values, the case is rejected. 
+        elif long_runs_mask.sum() > 1:
+            return None, None
+        
+        # Case 4: If there is exactly one long run of NaN values, check if there is at
+        # least MIN_DATA_LEN seconds on either side to keep the case.
+        else:
+            large_start = starts[long_runs_mask][0]
+            large_end = ends[long_runs_mask][0]
+
+            length_left = large_start
+            length_right = len(bis) - large_end
+
+            # Case 4.1: If left side is long enough and longer than right side, keep left side and interpolate NaNs.
+            if length_left >= MIN_DATA_LEN and length_left >= length_right:
+                new_bis = interpolate_nans(bis[:large_start])
+                new_crop = (start, start + large_start)
+                return new_bis, new_crop
+            
+            # Case 4.2: If right side is long enough and longer than left side, keep right side and interpolate NaNs.
+            elif length_right >= MIN_DATA_LEN and length_right >= length_left:
+                new_bis = interpolate_nans(bis[large_end:])
+                new_crop = (start + large_end, end)
+                return new_bis, new_crop
+
+            # Case 4.3: If neither side has at least MIN_DATA_LEN seconds of valid data, the case is rejected.
+            else:
+                return None, None 
+
 
 
 def interpolate_nans(signal, max_gap=None):
@@ -211,6 +282,8 @@ skipped_cases = []
 successful_cases = []
 
 high_quality_cases = pd.read_csv('high_quality_cases.csv')
+#high_quality_cases = pd.read_csv('high_quality_cases_subset.csv')
+
 
 for row in tqdm(high_quality_cases.itertuples(), total=len(high_quality_cases), desc="Preprocessing Cases"):
     
@@ -252,8 +325,8 @@ for row in tqdm(high_quality_cases.itertuples(), total=len(high_quality_cases), 
 
 # Save failure log
 if failed_cases:
-    pd.DataFrame(failed_cases).to_csv('preprocessed/failed_cases.csv', index=False)
-    print(f"Failed: {len(failed_cases)} cases — see preprocessed/failed_cases.csv")
+    pd.DataFrame(failed_cases).to_csv(os.path.join(OUTPUT_DIR, 'failed_cases.csv'), index=False)
+    print(f"Failed: {len(failed_cases)} cases — see {OUTPUT_DIR}/failed_cases.csv")
 
 print(f"Done — successful: {len(successful_cases)}, "
       f"skipped: {len(skipped_cases)}, "
@@ -294,7 +367,7 @@ REMI_TRACKS = set([
 
 all_cases = skipped_cases + successful_cases
 columns = ['caseid', 'optype', 'sex', 'age', 'asa', 'bmi', 'preop_hb', 
-           'preop_k', 'preop_na', 'preop_gluc', 'preop_cr', 'preop_alb']
+           'preop_k', 'preop_na', 'preop_gluc', 'preop_alb']
 
 df_cases = pd.read_csv("https://api.vitaldb.net/cases")
 df_trks = pd.read_csv("https://api.vitaldb.net/trks")

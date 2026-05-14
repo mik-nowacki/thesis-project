@@ -55,21 +55,23 @@ def filter_quality_cases(eeg_cases):
     - EMG: Electromyography mean value of less than 31 in the valid range to ensure low muscle artifact 
     '''
 
-    excluded = {'no_valid_range': 0, 'error': 0, 'late_start': 0, 'BIS_coverage': 0,
-                'BIS_range': 0, 'SQI_mean': 0, 'SQI_worst_10': 0, 'EMG_mean': 0,
+    excluded = {'no_valid_range': 0, 'error': 0, 'late_start': 0, 'early_finish': 0, 'BIS_coverage': 0,
+                'BIS_range': 0, 'SQI_mean': 0, 'SQI_worst_10': 0, 'EMG_mean': 0, 'EMG_worst_10': 0,
                 'art_coverage': 0, 'hr_coverage': 0, 'spo2_coverage': 0, 'etco2_coverage': 0}
     
-    tresholds = {
+    thresholds = {
         'start': 5*60,
+        'end': 10*60,
         'bis_cov': 0.95,
-        'bis_range': 60,
+        'bis_range': 55,
         'sqi_mean': 75,
         'sqi_p10': 40,
-        'emg_mean': 31,
-        'art_cov': 0.95,
-        'hr_cov': 0.95,
-        'spo2_cov': 0.95,
-        'etco2_cov': 0.88
+        'emg_mean': 32,
+        'emg_p90': 50,
+        'art_cov': 0.98,
+        'hr_cov': 0.97,
+        'spo2_cov': 0.98,
+        'etco2_cov': 0.85
     }
 
     quality_cases = {}
@@ -79,7 +81,6 @@ def filter_quality_cases(eeg_cases):
 
         try: 
             data = vitaldb.load_case(caseid, TRACKS, interval=1)
-        
 
             if data is None or len(data) == 0:
                 excluded['error'] += 1
@@ -92,44 +93,57 @@ def filter_quality_cases(eeg_cases):
                 continue
 
             # Exclude cases where valid SQI range starts later than 5 minutes after case start
-            if start > tresholds['start']:
+            if start > thresholds['start']:
                 excluded['late_start'] += 1
+                continue
+            
+            #Exclude cases where valid SQI range ends more than end threshold minutes before case end to ensure we capture the emergence phase
+            if end < len(data[0]) - thresholds['end']:
+                excluded['early_finish'] += 1
                 continue
 
             bis  = data[start:end, 0]
+            bis[bis <= 10] = np.nan
+
             sqi  = data[start:end, 1]
             emg  = data[start:end, 2]
 
             # Check BIS coverage
             bis_coverage = np.mean(~np.isnan(bis))
-            if bis_coverage < tresholds['bis_cov']:
+            if bis_coverage < thresholds['bis_cov']:
                 excluded['BIS_coverage'] += 1
                 continue
 
             # Check BIS range
             bis_range = np.nanmax(bis) - np.nanmin(bis)
-            if bis_range < tresholds['bis_range']:
+            if bis_range < thresholds['bis_range']:
                 excluded['BIS_range'] += 1
                 continue
 
             # Check SQI average
             sqi_mean = np.nanmean(sqi)
-            if sqi_mean < tresholds['sqi_mean']:
+            if sqi_mean < thresholds['sqi_mean']:
                 excluded['SQI_mean'] += 1
                 continue
 
             #Check SQI worst 10% to exclude cases with long periods of very poor quality
             sqi_p10 = np.nanpercentile(sqi, 10)
-            if sqi_p10 < tresholds['sqi_p10']:
+            if sqi_p10 < thresholds['sqi_p10']:
                 excluded['SQI_worst_10'] += 1
                 continue
 
             # Check EMG average
             emg_mean = np.nanmean(emg)
-            if emg_mean > tresholds['emg_mean']:
+            if emg_mean > thresholds['emg_mean']:
                 excluded['EMG_mean'] += 1
                 continue
-        
+
+            # Check EMG worst 10% to exclude cases with long periods of high muscle artifact
+            emg_p90 = np.nanpercentile(emg, 90)
+            if emg_p90 > thresholds['emg_p90']:
+                excluded['EMG_worst_10'] += 1
+                continue
+
         except Exception as e:
             excluded['error'] += 1
             continue
@@ -148,23 +162,23 @@ def filter_quality_cases(eeg_cases):
             cov_nibp = np.mean(~np.isnan(art_nibp))
             art_coverage  = max(cov_inv, cov_nibp)
 
-            if art_coverage < tresholds['art_cov']:
+            if art_coverage < thresholds['art_cov']:
                 excluded['art_coverage'] += 1
                 continue
 
             # Check other vital signs coverage
             hr_coverage   = np.mean(~np.isnan(data_vitals[start//2:end//2, 2]))
-            if hr_coverage < tresholds['hr_cov']:
+            if hr_coverage < thresholds['hr_cov']:
                 excluded['hr_coverage'] += 1
                 continue
             
             spo2_coverage = np.mean(~np.isnan(data_vitals[start//2:end//2, 3]))
-            if spo2_coverage < tresholds['spo2_cov']:
+            if spo2_coverage < thresholds['spo2_cov']:
                 excluded['spo2_coverage'] += 1
                 continue
             
             etco2_coverage= np.mean(~np.isnan(data_vitals[start//2:end//2, 4]))
-            if etco2_coverage < tresholds['etco2_cov']:
+            if etco2_coverage < thresholds['etco2_cov']:
                 excluded['etco2_coverage'] += 1
                 continue
 
