@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=eeg-iTrans     
-#SBATCH --output=history_itransformer/iTrans-%j.out      
-#SBATCH --error=history_itransformer/iTrans-%j.err   
+#SBATCH --job-name=iTrans-tun     
+#SBATCH --output=tuning/history_itransformer/iTrans-%j.out      
+#SBATCH --error=tuning/history_itransformer/iTrans-%j.err   
 #SBATCH -p long
 #SBATCH --gres=gpu:L4:1           
 #SBATCH --cpus-per-task=4         
@@ -9,6 +9,7 @@
 
 # read the cmd argument
 SEQ_LEN=${1:-200}
+P_CONTEXT_FLAG=${2:-""}  # either "--p_context" or ""
 
 # clear the cmd input (so that the conda env is loaded correctly)
 set -- 
@@ -30,6 +31,6 @@ else
     echo "Warning: .env file not found!"
 fi
 # Run the script
-echo "Starting iTransformer on GPU for SEQ_LEN: $SEQ_LEN..."
-python src/python_scripts/optuna_tuning/tune_itransformer.py --seq_len $SEQ_LEN
+echo "Starting iTransformer on GPU for SEQ_LEN: $SEQ_LEN | $P_CONTEXT_FLAG"
+python src/python_scripts/optuna_tuning/tune_itransformer.py --seq_len $SEQ_LEN $P_CONTEXT_FLAG
 echo "Job finished."

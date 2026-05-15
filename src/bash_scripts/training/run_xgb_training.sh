@@ -1,14 +1,15 @@
 #!/bin/bash
-#SBATCH --job-name=eeg-xgb     
-#SBATCH --output=history_xgb/xgb-%j.out      
-#SBATCH --error=history_xgb/xgb-%j.err   
-#SBATCH -p long
-#SBATCH --gres=gpu:L4:1           
-#SBATCH --cpus-per-task=4         
-#SBATCH --mem=32G                 
+#SBATCH --job-name=bis-xgb     
+#SBATCH --output=training/history_xgb/xgb-%j.out      
+#SBATCH --error=training/history_xgb/xgb-%j.err  
+ 
+#SBATCH --gres=gpu:L4:1           # Request 1 NVIDIA L4 GPU
+#SBATCH --cpus-per-task=4         # Request 4 CPU cores for the PyTorch DataLoader
+#SBATCH --mem=32G                 # Request 32GB of RAM
 
 # read the cmd argument
 SEQ_LEN=${1:-60}
+P_CONTEXT_FLAG=${2:-""}  # either "--p_context" or ""
 
 # clear the cmd input (so that the conda env is loaded correctly)
 set -- 
@@ -30,7 +31,7 @@ else
     echo "Warning: .env file not found!"
 fi
 
-# Run it
-echo "Starting XGBoost on GPU for SEQ_LEN: $SEQ_LEN..."
-python src/python_scripts/training/train_xgb.py --seq_len $SEQ_LEN
+# Run the script
+echo "Starting XGBoost on GPU for SEQ_LEN: $SEQ_LEN | $P_CONTEXT_FLAG"
+python src/python_scripts/training/train_xgb.py --seq_len $SEQ_LEN $P_CONTEXT_FLAG
 echo "Job finished."

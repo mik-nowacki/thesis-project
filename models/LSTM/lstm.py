@@ -17,6 +17,7 @@ class Model(nn.Module):
         
         linear_input_features = hidden_size * 2 if bidirectional else hidden_size
         self.fc = nn.Linear(linear_input_features, output_size)
+        
 
     def forward(self, x):
         # x shape: (batch_size, seq_len, features)

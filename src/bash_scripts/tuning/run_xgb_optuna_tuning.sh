@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=eeg-xgb     
-#SBATCH --output=history_xgb/xgb-%j.out      
-#SBATCH --error=history_xgb/xgb-%j.err   
+#SBATCH --job-name=xgb-tun     
+#SBATCH --output=tuning/history_xgb/xgb-%j.out      
+#SBATCH --error=tuning/history_xgb/xgb-%j.err   
 #SBATCH -p long
 #SBATCH --gres=gpu:L4:1           
 #SBATCH --cpus-per-task=4         
@@ -9,6 +9,7 @@
 
 # read the cmd argument
 SEQ_LEN=${1:-60}
+P_CONTEXT_FLAG=${2:-""}  # either "--p_context" or ""
 
 # clear the cmd input (so that the conda env is loaded correctly)
 set -- 
@@ -30,7 +31,7 @@ else
     echo "Warning: .env file not found!"
 fi
 
-# Run it
-echo "Starting XGBoost on GPU for SEQ_LEN: $SEQ_LEN..."
-python src/python_scripts/optuna_tuning/tune_xgb.py --seq_len $SEQ_LEN
+# Run the script
+echo "Starting XGBoost on GPU for SEQ_LEN: $SEQ_LEN | $P_CONTEXT_FLAG"
+python src/python_scripts/optuna_tuning/tune_xgb.py --seq_len $SEQ_LEN $P_CONTEXT_FLAG
 echo "Job finished."

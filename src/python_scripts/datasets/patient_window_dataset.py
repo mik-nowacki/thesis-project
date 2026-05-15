@@ -88,7 +88,8 @@ class PatientWindowDataset(Dataset):
         self.num_context_features = self.patient_ctx[0].shape[0] if self.patient_ctx else 0
 
         print(
-            f"Dataset ready | windows: {len(self.index_map)} | "
+            f"{'Training set' if is_training else 'Validation set'} ready | "
+            f"windows: {len(self.index_map)} | "
             f"ts_features: {self.num_features} | "
             f"ctx_features: {self.num_context_features}"
         )
@@ -114,8 +115,13 @@ class PatientWindowDataset(Dataset):
         Y_target = self.patient_Y[p_idx][start_t + self.seq_len]
 
         if self.has_context:
-            ctx = torch.tensor(self.patient_ctx[p_idx], dtype=torch.float32)
-            return X_window, ctx, Y_target
+            # (num_context_features,)
+            C_window = torch.tensor(self.patient_ctx[p_idx], dtype=torch.float32) 
+
+            # (seq_len, num_context_features)
+            C_window = C_window.unsqueeze(0).expand(self.seq_len, -1) # repeat the static data across the entire window
+            
+            return X_window, C_window, Y_target
 
         return X_window, Y_target
     
@@ -155,3 +161,43 @@ class PatientWindowDataset(Dataset):
         X = np.array(X_list, dtype=np.float32)
         Y = np.array(Y_list, dtype=np.float32).reshape(-1, 1)
         return X, Y
+    
+    @staticmethod
+    def preprocess_context(
+         context_df: pd.DataFrame,
+         scaler=None,
+         is_training: bool = True,
+         ) -> pd.DataFrame:
+        """
+        Encodes and normalises the patient-level context CSV so every column
+        is numeric and ready to be appended to the feature matrix.
+        Expects caseid to be the index.
+        """
+        df = context_df.copy()
+
+        # Binary encode sex
+        df['sex'] = df['sex'].map({'F': 0, 'M': 1})
+
+        # One-hot encode surgery type
+        df = pd.get_dummies(df, columns=['optype'], drop_first=True, dtype=float)
+
+        # Boolean columns -> float
+        bool_cols = df.select_dtypes(include='bool').columns
+        df[bool_cols] = df[bool_cols].astype(float)
+
+        # Fill any remaining NaNs with median
+        df = df.fillna(df.median(numeric_only=True))
+
+        # Scale numerical columns
+        numerical_cols = ['age', 'bmi', 'asa', 'preop_hb', 'preop_k',
+                        'preop_na', 'preop_gluc', 'preop_alb']
+        # Only scale columns that exist
+        numerical_cols = [c for c in numerical_cols if c in df.columns]
+
+        if scaler is not None:
+            if is_training:
+                df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
+            else:
+                df[numerical_cols] = scaler.transform(df[numerical_cols])
+
+        return df
