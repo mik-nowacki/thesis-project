@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=bis-xgb     
+#SBATCH --job-name=xgb-trai     
 #SBATCH --output=training/history_xgb/xgb-%j.out      
 #SBATCH --error=training/history_xgb/xgb-%j.err  
  

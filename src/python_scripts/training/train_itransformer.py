@@ -97,7 +97,7 @@ def main():
 
     save_dir = None
 
-    train_itransformer(train_set, val_set, args.seq_len, args.p_context, device)
+    train_itransformer(train_set, val_set, args.seq_len, args.p_context, device, save_dir)
 
 
 if __name__ == "__main__":

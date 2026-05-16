@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=iTrans-tun     
+#SBATCH --job-name=iTr-tun     
 #SBATCH --output=tuning/history_itransformer/iTrans-%j.out      
 #SBATCH --error=tuning/history_itransformer/iTrans-%j.err   
 #SBATCH -p long

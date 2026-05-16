@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=iTrans-trai     
+#SBATCH --job-name=iTr-trai     
 #SBATCH --output=training/history_itransformer/iTrans-%j.out      
 #SBATCH --error=training/history_itransformer/iTrans-%j.err   
 #SBATCH -p long
