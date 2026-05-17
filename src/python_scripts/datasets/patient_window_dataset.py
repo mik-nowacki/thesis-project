@@ -59,17 +59,17 @@ class PatientWindowDataset(Dataset):
 
             # store content for the patient (empty if not provided)
             if self.has_context and cid in context_df.index:
-                  self.patient_ctx.append(context_df.loc[cid].values.astype(np.float32))
+                self.patient_ctx.append(context_df.loc[cid].values.astype(np.float32))
             else:
-                 self.patient_ctx.append(np.array([], dtype=np.float32))
+                self.patient_ctx.append(np.array([], dtype=np.float32))
 
             if is_training and scaler is not None:
-                 all_X_for_scaler.append(x)
+                all_X_for_scaler.append(x)
             
             # Only index whose target Y is not NaN
             for start_t in range(x.shape[0] - seq_len):
-                 if not np.isnan(y[start_t + seq_len]):
-                      self.index_map.append((patient_idx, start_t))
+                if not np.isnan(y[start_t + seq_len]):
+                    self.index_map.append((patient_idx, start_t))
 
             patient_idx+=1
 
@@ -100,6 +100,12 @@ class PatientWindowDataset(Dataset):
 
     def __len__(self) -> int:
          return len(self.index_map)
+    
+    def __getitem__(self, idx: int):
+         raise NotImplementedError("This method should be implemented in a subclass depending on the model's needs.")
+    
+
+class CatContextDataset(PatientWindowDataset):
     
 
     def __getitem__(self, idx: int):
@@ -201,3 +207,17 @@ class PatientWindowDataset(Dataset):
                 df[numerical_cols] = scaler.transform(df[numerical_cols])
 
         return df
+    
+class SeparateContextDataset(PatientWindowDataset):
+     
+    def __getitem__(self, idx):
+        p_idx, start_t = self.index_map[idx]
+        
+        X_window = self.patient_X[p_idx][start_t : start_t + self.seq_len]
+        Y_target = self.patient_Y[p_idx][start_t : start_t + self.seq_len]  # full sequence
+        
+        if self.has_context:
+            C_context = torch.tensor(self.patient_ctx[p_idx], dtype=torch.float32)  # (n_ctx,)
+            return X_window, C_context, Y_target
+        
+        return X_window, Y_target
