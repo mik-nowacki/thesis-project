@@ -95,7 +95,7 @@ def prepare_datasets_trans(seq_len, has_context):
     # --- DATASET INITIALIZATION ---
     train_set = SeparateContextDataset(
         input_dir=INPUT_DIR, case_ids=train_ids, seq_len=seq_len,
-        scaler=scaler, is_training=True, context_df=train_ctx
+        scaler=scaler, stride=5, is_training=True, context_df=train_ctx
     )
 
     val_set = SeparateContextDataset(

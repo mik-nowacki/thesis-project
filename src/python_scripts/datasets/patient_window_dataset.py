@@ -27,6 +27,7 @@ class PatientWindowDataset(Dataset):
         case_ids: list,
         seq_len: int,
         scaler = None,
+        stride = 1,
         is_training: bool = True,
         context_df: pd.DataFrame | None = None
     ):
@@ -67,7 +68,7 @@ class PatientWindowDataset(Dataset):
                 all_X_for_scaler.append(x)
             
             # Only index whose target Y is not NaN
-            for start_t in range(x.shape[0] - seq_len):
+            for start_t in range(0, x.shape[0] - seq_len, stride):
                 if not np.isnan(y[start_t + seq_len]):
                     self.index_map.append((patient_idx, start_t))
 
@@ -214,7 +215,7 @@ class SeparateContextDataset(PatientWindowDataset):
         p_idx, start_t = self.index_map[idx]
         
         X_window = self.patient_X[p_idx][start_t : start_t + self.seq_len]
-        Y_target = self.patient_Y[p_idx][start_t : start_t + self.seq_len]  # full sequence
+        Y_target = self.patient_Y[p_idx][start_t + self.seq_len]
         
         if self.has_context:
             C_context = torch.tensor(self.patient_ctx[p_idx], dtype=torch.float32)  # (n_ctx,)

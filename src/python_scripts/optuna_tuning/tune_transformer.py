@@ -6,7 +6,8 @@ from torch.utils.data import DataLoader
 from dataclasses import dataclass
 
 import sys
-sys.path.append('C:/GU/Thesis/code/thesis-project')
+sys.path.append('/data/users/wardda/Master/thesis-project')
+
 import os
 import json
 
@@ -39,11 +40,11 @@ def objective(trial, train_dataset, val_dataset, seq_len, has_context, device, s
         # Transformer
         'sequential_input_size': train_dataset.num_features,
         'has_context': has_context,
-        'static_input_size': train_dataset.size_context, 
-        'd_model': trial.suggest_categorical('d_model', [32, 64, 128, 256]),
+        'static_input_size': train_dataset.num_context_features, 
+        'd_model': trial.suggest_categorical('d_model', [16, 24, 32, 48, 64]),
         'n_layers': trial.suggest_categorical('n_layers', [3, 4, 5, 6]),
         'dropout': trial.suggest_float('dropout', 0.0, 0.5),
-        'n_heads': trial.suggest_categorical('n_heads', [2, 4, 8]),
+        'n_heads': trial.suggest_categorical('n_heads', [2, 4]),
         'ffn_multiplier': trial.suggest_categorical('ffn_multiplier', [2, 4]),
         'use_intermediate_prediction': trial.suggest_categorical('use_intermediate_prediction', [True, False])
         
@@ -55,12 +56,12 @@ def objective(trial, train_dataset, val_dataset, seq_len, has_context, device, s
         # Dataloader
         'batch_size': trial.suggest_categorical('batch_size', [32, 64, 128, 256]),
         'weight_decay': trial.suggest_float('weight_decay', 1e-6, 1e-2, log=True),
-        'epochs': 20
+        'epochs': 10
     }
 
     run = wandb.init(
-        project="bis-prediction-optuna-tuning",
-        group=f"trans-seq-{seq_len}",
+        project="DoA-Prediction-Transformer-Tuning",
+        group=f"trans-seq-{seq_len}-context-{has_context}",
         name=f"trans-trial_{trial.number}",
         config={**model_params, **training_params},
         reinit=True,
@@ -109,7 +110,7 @@ def main():
     # Run the optimization
     study.optimize(
         lambda trial: objective(trial, train_set, val_set, args.seq_len, args.p_context, device, save_dir), 
-        n_trials=50
+        n_trials=20
     )
 
     process_optuna_results(

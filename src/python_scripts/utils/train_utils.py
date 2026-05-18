@@ -189,8 +189,8 @@ def run_pytorch_training(
 
             # W&B Logging
             wandb.log({
-                "train_mse": train_mse, "train_rmse": train_rmse, "train_r2": train_r2,
-                "val_mse": val_mse, "val_rmse": val_rmse, "val_r2": val_r2,
+                "train_mse": train_mse*100, "train_rmse": train_rmse*100, "train_r2": train_r2,
+                "val_mse": val_mse*100, "val_rmse": val_rmse*100, "val_r2": val_r2,
                 "learning_rate": optimizer.param_groups[0]['lr'], "epoch": epoch
             })
 

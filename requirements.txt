@@ -4,3 +4,7 @@ matplotlib
 vitaldb
 torch
 scikit-learn
+wandb
+optuna
+xgboost
+optuna-integration[xgboost]
