@@ -18,8 +18,11 @@ set --
 source ~/miniforge3/bin/activate
 conda activate thesis_project
 
+#source ~/Master/DoA_pred_venv/bin/activate
+
 # Set paths
 cd /data/users/$USER/thesis-project/
+#cd /data/users/$USER/Master/thesis-project/
 export PYTHONPATH="$(pwd):$PYTHONPATH"
 
 # Load Secrets securely from the .env file

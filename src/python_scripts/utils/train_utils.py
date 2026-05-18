@@ -79,7 +79,7 @@ def run_xgboost_training(
 
 def run_pytorch_training(
     model, train_loader, val_loader, optimizer, criterion, device,
-    epochs, has_context, model_type, 
+    epochs, has_context, model_type, scheduler= None,
     trial=None, save_dir=None, early_stopping_rounds=10
 ):
     """
@@ -123,6 +123,10 @@ def run_pytorch_training(
                     # iTransformer uses a dedicated kwarg for context marks
                     y_pred = model(x_enc=batch_X, x_mark_enc=batch_C)
 
+                elif model_type == 'transformer':
+                    #Transformer uses separate kwargs for sequential and static inputs
+                    y_pred = model(x_seq=batch_X, x_static=batch_C)
+
                 loss = criterion(y_pred, batch_Y)
                 loss.backward()
                 optimizer.step()
@@ -164,6 +168,8 @@ def run_pytorch_training(
                         y_pred = model(batch_X)
                     elif model_type == 'itransformer':
                         y_pred = model(x_enc=batch_X, x_mark_enc=batch_C)
+                    elif model_type == 'transformer':
+                        y_pred = model(x_seq=batch_X, x_static=batch_C)
 
                     loss = criterion(y_pred, batch_Y)
                     val_sse += loss.item() * batch_X.size(0)
@@ -178,11 +184,14 @@ def run_pytorch_training(
             v_targs = torch.cat(val_targets).numpy().flatten()
             val_r2 = r2_score(v_targs, v_preds)
 
+            if scheduler is not None:
+                scheduler.step()
+
             # W&B Logging
             wandb.log({
-                "train_mse": train_mse, "train_rmse": train_rmse, "train_r2": train_r2,
-                "val_mse": val_mse, "val_rmse": val_rmse, "val_r2": val_r2,
-                "epoch": epoch
+                "train_mse": train_mse*100, "train_rmse": train_rmse*100, "train_r2": train_r2,
+                "val_mse": val_mse*100, "val_rmse": val_rmse*100, "val_r2": val_r2,
+                "learning_rate": optimizer.param_groups[0]['lr'], "epoch": epoch
             })
 
             # ==============================
@@ -223,6 +232,8 @@ def run_pytorch_training(
     finally:
         if 'model' in locals():
             del model
+        if 'scheduler' in locals():
+            del scheduler
         if 'optimizer' in locals():
             del optimizer
         if 'criterion' in locals():
